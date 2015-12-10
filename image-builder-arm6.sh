@@ -46,9 +46,12 @@ sed -i 's/gpu_mem=64/gpu_mem=16/' boot/config.txt
 mv /tmp/configure-system.sh root
 
 # Download Wi-Fi files from GitHub
+### TO DO FIX PATHS TO MOUNT POINT!!
 wget -P /etc/systemd/network/wlan0.network https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
 wget -P /etc/systemd/system/wpa_supplicant.service https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
-wget -P /
+wget -P /etc/wpa_supplicant/wlan0.conf https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.conf
+sed -i 's/AccessPointName/'$wifiAP'/' /etc/wpa_supplicant/wlan0.conf
+sed -i 's/TopSecretPassword/'$wifiKey'/' /etc/wpa_supplicant/wlan0.conf
 
 # Do a final sync, and wait 5 seconds before unmouting
 sync
