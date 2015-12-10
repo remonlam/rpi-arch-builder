@@ -3,6 +3,8 @@
 ### SCRIPT VARIABLES
 ## Ask user for system specific variables
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
+read -p 'Enter wifi name (Accesspoint): ' wifiAP
+read -p 'Enter wifi password: ' wifiKey
 part1=1
 part2=2
 
@@ -42,6 +44,11 @@ sed -i 's/gpu_mem=64/gpu_mem=16/' boot/config.txt
 
 # Copy "configure-system.sh" script to "root"
 mv /tmp/configure-system.sh root
+
+# Download Wi-Fi files from GitHub
+wget -P /etc/systemd/network/wlan0.network https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
+wget -P /etc/systemd/system/wpa_supplicant.service https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
+wget -P /
 
 # Do a final sync, and wait 5 seconds before unmouting
 sync
