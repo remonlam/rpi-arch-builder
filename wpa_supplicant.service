@@ -1,0 +1,12 @@
+[Unit]
+Description=Wireless network connection wlan0
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/usr/sbin/wpa_supplicant -i wlan0 -D wext -B -c/etc/wpa_supplicant/wlan0.conf
+
+[Install]
+WantedBy=multi-user.target
