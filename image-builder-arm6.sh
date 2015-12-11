@@ -1,5 +1,14 @@
 #!/bin/sh
 
+# Check if script runs as root, if not exit
+echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING...."
+if [ `id -u` = 0 ] ; then
+        echo "Running as ROOT, continue with script...."
+  else
+echo "Not running as ROOT exit script...."
+exit 1
+fi
+
 ### SCRIPT VARIABLES
 ## Ask user for system specific variables
 echo "PI 1 MODEL A+, PI 1 MODEL B+, PI ZERO are V6 --- PI 2 MODEL B is V7"
