@@ -16,35 +16,40 @@ yum install -y wget bsdtar
 wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
 chmod 755 /tmp/configure-system.sh
 
-echo "Using version '$armversion'"
-  if [ $armversion=6 ]; then
-  wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-  bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
-  sync
-  else
-  wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-  bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
-  sync
-  fi
-
-
 ##fdisk /dev/$sdCard
 # Create parition layout
+echo "Create new parition layout on '$sdCard'"
 # NOTE: This will create a partition layout as beeing described in the README...
 (echo o; echo n; echo p; echo 1; echo ; echo +100M; echo t; echo c; echo n; echo p; echo 2; echo ; echo ; echo w) | fdisk /dev/$sdCard
-
 # Sync disk
 sync
 
 #Create and mount the FAT filesystem:
+echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 mkfs.vfat /dev/$sdCard$part1
 mkdir boot
 mount /dev/$sdCard$part1 boot
 
 #Create and mount the ext4 filesystem:
+echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 mkfs.ext4 /dev/$sdCard$part2
 mkdir root
 mount /dev/$sdCard$part2 root
+
+echo "Download Arch Linux ARM v'$armversion' and expand to root"
+  if [ $armversion=6 ]; then
+    echo "Downloading Arch Linux ARM v'$armversion'"
+     wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+    echo "Download complete, expanding tar.gz to root"
+     bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
+     sync
+  else
+    echo "Downloading Arch Linux ARM v'$armversion'"
+     wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+    echo "Download complete, expanding tar.gz to root"
+     bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+     sync
+  fi
 
 # NOTE: moved this part to ARMversion selection
 #Download and extract the root filesystem (as root, not via sudo):
@@ -71,6 +76,7 @@ sed -i 's/TopSecretPassword/'$wifiKey'/' root/etc/wpa_supplicant/wlan0.conf
 
 # Do a final sync, and wait 5 seconds before unmouting
 sync
+echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
 sleep 5
 
 #Unmount the two partitions:
