@@ -10,8 +10,13 @@ read -p 'Enter wifi password: ' wifiKey
 part1=1
 part2=2
 
-echo "Using version '$armversion'"
+# Do some pre-requirements
+# Install wget and badtar
+yum install -y wget bsdtar
+wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
+chmod 755 /tmp/configure-system.sh
 
+echo "Using version '$armversion'"
   if [ $armversion=6 ]; then
   wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
   bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
@@ -22,13 +27,6 @@ echo "Using version '$armversion'"
   sync
   fi
 
-
-
-# Do some pre-requirements
-# Install wget and badtar
-yum install -y wget bsdtar
-wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
-chmod 755 /tmp/configure-system.sh
 
 ##fdisk /dev/$sdCard
 # Create parition layout
