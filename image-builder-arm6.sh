@@ -60,12 +60,6 @@ echo "Download Arch Linux ARM v'$armversion' and expand to root"
      sync
   fi
 
-# NOTE: moved this part to ARMversion selection
-#Download and extract the root filesystem (as root, not via sudo):
-#wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-#bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
-#sync
-
 #Move boot files to the first partition:
 mv root/boot/* boot
 echo '# Change rotation of Pi Screen' >> boot/config.txt
@@ -80,6 +74,7 @@ mv /tmp/configure-system.sh root
 wget -P root/etc/systemd/network/wlan0.network https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
 wget -P root/etc/systemd/system/wpa_supplicant.service https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
 wget -P root/etc/wpa_supplicant/wlan0.conf https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.conf
+# NOTE: NEES TO BE CHECKED IF WOKRING
 sed -i 's/AccessPointName/'$wifiAP'/' root/etc/wpa_supplicant/wlan0.conf
 sed -i 's/TopSecretPassword/'$wifiKey'/' root/etc/wpa_supplicant/wlan0.conf
 
@@ -90,3 +85,4 @@ sleep 5
 
 #Unmount the two partitions:
 umount boot root
+echo "Unmount completed, it's safe to remove the microSD card!"
