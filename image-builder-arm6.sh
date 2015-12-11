@@ -13,13 +13,15 @@ part2=2
 echo "Using version '$armversion'"
 
   if [ $armversion=6 ]; then
-  6=http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+  wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+  bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
+  sync
   else
-  7=http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+  wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+  bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+  sync
   fi
 
-armversion6=ArchLinuxARM-rpi-latest.tar.gz
-armversion7=ArchLinuxARM-rpi-2-latest.tar.gz
 
 
 # Do some pre-requirements
@@ -46,10 +48,11 @@ mkfs.ext4 /dev/$sdCard$part2
 mkdir root
 mount /dev/$sdCard$part2 root
 
+# NOTE: moved this part to ARMversion selection
 #Download and extract the root filesystem (as root, not via sudo):
-wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
-sync
+#wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+#bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
+#sync
 
 #Move boot files to the first partition:
 mv root/boot/* boot
