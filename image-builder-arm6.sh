@@ -2,11 +2,25 @@
 
 ### SCRIPT VARIABLES
 ## Ask user for system specific variables
+echo "PI 1 MODEL A+, PI 1 MODEL B+, PI ZERO are V6 --- PI 2 MODEL B is V7"
+read -p 'What version of Pi? v6 or v7 ' armversion
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
 read -p 'Enter wifi name (Accesspoint): ' wifiAP
 read -p 'Enter wifi password: ' wifiKey
 part1=1
 part2=2
+
+echo "Using version '$armversion'"
+
+  if [ $armversion=6 ]; then
+  6=http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+  else
+  7=http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+  fi
+
+armversion6=ArchLinuxARM-rpi-latest.tar.gz
+armversion7=ArchLinuxARM-rpi-2-latest.tar.gz
+
 
 # Do some pre-requirements
 # Install wget and badtar
@@ -39,7 +53,7 @@ sync
 
 #Move boot files to the first partition:
 mv root/boot/* boot
-echo '# Change rotation of Pi Screen' >> boot/config.txt 
+echo '# Change rotation of Pi Screen' >> boot/config.txt
 echo lcd_rotate=2 >> boot/config.txt
 sed -i 's/gpu_mem=64/gpu_mem=16/' boot/config.txt
 
