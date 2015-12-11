@@ -71,9 +71,9 @@ mv /tmp/configure-system.sh root
 
 # Download Wi-Fi files from GitHub
 ### TODO: CHECK PATHS TO MOUNT POINT!!
-wget -P root/etc/systemd/network/wlan0.network https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
-wget -P root/etc/systemd/system/wpa_supplicant.service https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
-wget -P root/etc/wpa_supplicant/wlan0.conf https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.conf
+wget -P root/etc/systemd/network/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
+wget -P root/etc/systemd/system/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
+wget -P root/etc/wpa_supplicant/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.conf
 # NOTE: NEES TO BE CHECKED IF WOKRING
 sed -i 's/AccessPointName/'$wifiAP'/' root/etc/wpa_supplicant/wlan0.conf
 sed -i 's/TopSecretPassword/'$wifiKey'/' root/etc/wpa_supplicant/wlan0.conf
