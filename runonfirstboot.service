@@ -1,0 +1,11 @@
+[Unit]
+Description=Install packages for wifi
+After=network.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/sbin/pacman -U --noconfirm libnl-3.2.26-1-armv6h.pkg.tar.xz && /usr/sbin/pacman -U --noconfirm wpa_supplicant-1:2.3-1-armv6h.pkg.tar.xz
+
+[Install]
+WantedBy=multi-user.target
