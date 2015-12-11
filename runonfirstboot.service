@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/sbin/pacman -U --noconfirm libnl-3.2.26-1-armv6h.pkg.tar.xz && /usr/sbin/pacman -U --noconfirm wpa_supplicant-1:2.3-1-armv6h.pkg.tar.xz
-
+#ExecStart=/usr/sbin/pacman -U --noconfirm libnl-3.2.26-1-armv6h.pkg.tar.xz && /usr/sbin/pacman -U --noconfirm wpa_supplicant-1:2.3-1-armv6h.pkg.tar.xz
+ExecStart=/bin/bash ./install-packages.sh
 [Install]
 WantedBy=multi-user.target
