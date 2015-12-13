@@ -113,8 +113,9 @@ chmod 755 /tmp/configure-system.sh
 
 
 # Copy netctl wlan0 config file
-wget
-cp -rf /root/Desktop/wlan0 /temp/root/etc/netctl/
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0
+cp -rf /temp/wlan0 /temp/root/etc/netctl/
+
 # Replace SSID name
 sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
 # Replace SSID password
