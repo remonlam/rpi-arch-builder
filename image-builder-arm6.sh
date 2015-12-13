@@ -2,18 +2,19 @@
 
 ### RUNTIME CHECK
 # Check if script is running as root, if not then exit
-echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING...."
+echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING..."
 if [ `id -u` = 0 ] ; then
-        echo "Running as ROOT, continue with script...."
+        echo "Running as ROOT, continue with script..."
   else
-echo "Not running as ROOT exit script...."
+echo "Not running as ROOT exit script..."
 exit 1
 fi
 
+
 ### SCRIPT VARIABLES
 ## Ask user for system specific variables
-echo "PI 1 MODEL A+, PI 1 MODEL B+, PI ZERO are V6 --- PI 2 MODEL B is V7"
-read -p 'What version of Pi? v6 or v7 ' armversion
+echo "NOTE: PI 1 MODEL A+, PI 1 MODEL B+, PI ZERO are 6 --- PI 2 MODEL B is 7"
+read -p 'What version of Pi? 6 or 7 ' armVersion
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
 read -p 'Enter a new hostname: ' hostName
 read -p 'Enter wifi name (Accesspoint): ' wifiAP
@@ -21,16 +22,15 @@ read -p 'Enter wifi password: ' wifiKey
 part1=1
 part2=2
 
-# Wipe microSD card @ $sdCard
-# NOTE: Does not work as expected, need to check this part
-#echo "Wipe microSD card ('$sdCard')"
-#dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
 
 ### PRE-REQUIREMENTS
-# Install wget and badtar
+# Check or install wget, tar and badtar
 yum install -y wget bsdtar tar
-wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
-chmod 755 /tmp/configure-system.sh
+
+# Wipe microSD card @ $sdCard
+echo "Wipe microSD card ('$sdCard')"
+dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
+
 
 ##fdisk /dev/$sdCard
 # Create parition layout
@@ -52,15 +52,15 @@ mkfs.ext4 /dev/$sdCard$part2
 mkdir root
 mount /dev/$sdCard$part2 root
 
-echo "Download Arch Linux ARM v'$armversion' and expand to root"
-  if [ $armversion=6 ]; then
-    echo "Downloading Arch Linux ARM v'$armversion'"
+echo "Download Arch Linux ARM v'$armVersion' and expand to root"
+  if [ $armVersion=6 ]; then
+    echo "Downloading Arch Linux ARM v'$armVersion'"
     # wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
     echo "Download complete, expanding tar.gz to root"
      bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
      sync
   else
-    echo "Downloading Arch Linux ARM v'$armversion'"
+    echo "Downloading Arch Linux ARM v'$armVersion'"
      wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
     echo "Download complete, expanding tar.gz to root"
      bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
@@ -106,6 +106,11 @@ tar -xf /tmp/libnl_wpa_package.tar.gz -C root/
 
 
 #############
+
+# Download post configuration script and make file executable
+wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
+chmod 755 /tmp/configure-system.sh
+
 
 # Copy netctl wlan0 config file
 cp -rf /root/Desktop/wlan0 root/etc/netctl/
