@@ -43,14 +43,14 @@ sync
 #Create and mount the FAT filesystem:
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 mkfs.vfat /dev/$sdCard$part1
-mkdir boot
-mount /dev/$sdCard$part1 boot
+mkdir -p /tmp/boot
+mount /dev/$sdCard$part1 /tmp/boot
 
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 mkfs.ext4 /dev/$sdCard$part2
-mkdir root
-mount /dev/$sdCard$part2 root
+mkdir -p /tmp/root
+mount /dev/$sdCard$part2 /tmp/root
 
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
@@ -68,15 +68,15 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   fi
 
 #Move boot files to the first partition:
-mv root/boot/* boot
-echo '# Change rotation of Pi Screen' >> boot/config.txt
-echo lcd_rotate=2 >> boot/config.txt
+mv /temp/root/boot/* /temp/boot
+echo '# Change rotation of Pi Screen' >> /temp/boot/config.txt
+echo lcd_rotate=2 >> /temp/boot/config.txt
 
 # Change GPU memory from 64MB to 16MB
-sed -i 's/gpu_mem=64/gpu_mem=16/' boot/config.txt
+sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 
 # Copy "configure-system.sh" script to "root"
-mv /tmp/configure-system.sh root
+mv /tmp/configure-system.sh /temp/root
 
 # Download Wi-Fi files from GitHub
 ### TODO: CHECK PATHS TO MOUNT POINT!!
@@ -98,7 +98,7 @@ mv /tmp/configure-system.sh root
 # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
 wget -P /tmp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
 # Extract tar.gz file to root/
-tar -xf /tmp/libnl_wpa_package.tar.gz -C root/
+tar -xf /tmp/libnl_wpa_package.tar.gz -C /temp/root/
 
 
 # Copy extra sources
@@ -113,21 +113,22 @@ chmod 755 /tmp/configure-system.sh
 
 
 # Copy netctl wlan0 config file
-cp -rf /root/Desktop/wlan0 root/etc/netctl/
+wget
+cp -rf /root/Desktop/wlan0 /temp/root/etc/netctl/
 # Replace SSID name
-sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" root/etc/netctl/wlan0
+sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
 # Replace SSID password
-sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" root/etc/netctl/wlan0
+sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
 
 
 # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-cp -rf /root/Desktop/symlink/netctl@wlan0.service root/etc/systemd/system/
-ln -s 'root/etc/systemd/system/netctl@wlan0.service' 'root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+cp -rf /root/Desktop/symlink/netctl@wlan0.service /temp/root/etc/systemd/system/
+ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 
 # Enable root logins for sshd
-sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" root/etc/ssh/sshd_config
+sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
 # Change hostname
-sed -i 's/alarmpi/'$hostName'/' root/etc/hostname
+sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
 
 
 
@@ -137,5 +138,11 @@ echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
 sleep 5
 
 #Unmount the boot and root partitions:
-#umount boot root
+#umount /temp/boot /temp/root
 echo "Unmount completed, it's safe to remove the microSD card!"
+
+# Removing data sources
+echo "Remove datasources"
+rm -rf /temp/
+echo "All files in /temp/ are removed!
+exit 0
