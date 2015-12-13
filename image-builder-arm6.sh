@@ -75,8 +75,7 @@ echo lcd_rotate=2 >> /temp/boot/config.txt
 # Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 
-# Copy "configure-system.sh" script to "root"
-mv /tmp/configure-system.sh /temp/root
+
 
 # Download Wi-Fi files from GitHub
 ### TODO: CHECK PATHS TO MOUNT POINT!!
@@ -108,9 +107,10 @@ tar -xf /tmp/libnl_wpa_package.tar.gz -C /temp/root/
 #############
 
 # Download post configuration script and make file executable
-wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
-chmod 755 /tmp/configure-system.sh
-
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
+chmod 755 /temp/configure-system.sh
+# Copy "configure-system.sh" script to "root"
+mv /tmp/configure-system.sh /temp/root
 
 # Copy netctl wlan0 config file
 wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0
@@ -120,7 +120,6 @@ cp -rf /temp/wlan0 /temp/root/etc/netctl/
 sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
 # Replace SSID password
 sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
-
 
 # Copy wlan0.service file to systemd and create symlink to make it work at first boot
 cp -rf /root/Desktop/symlink/netctl@wlan0.service /temp/root/etc/systemd/system/
