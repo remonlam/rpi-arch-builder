@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Check if script runs as root, if not exit
+### RUNTIME CHECK
+# Check if script is running as root, if not then exit
 echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING...."
 if [ `id -u` = 0 ] ; then
         echo "Running as ROOT, continue with script...."
@@ -21,10 +22,11 @@ part1=1
 part2=2
 
 # Wipe microSD card @ $sdCard
+# NOTE: Does not work as expected, need to check this part
 #echo "Wipe microSD card ('$sdCard')"
 #dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
 
-# Do some pre-requirements
+### PRE-REQUIREMENTS
 # Install wget and badtar
 yum install -y wget bsdtar tar
 wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
