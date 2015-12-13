@@ -140,11 +140,12 @@ echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
 sleep 5
 
 #Unmount the boot and root partitions:
-#umount /temp/boot /temp/root
+umount /temp/boot /temp/root
 echo "Unmount completed, it's safe to remove the microSD card!"
 
 # Removing data sources
-echo "Remove datasources"
+echo "Remove datasources, waiting until mount points are removed"
+sleep 5
 rm -rf /temp/
 echo "All files in /temp/ are removed!
 exit 0
