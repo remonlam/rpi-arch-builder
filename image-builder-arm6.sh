@@ -26,7 +26,7 @@ part2=2
 
 # Do some pre-requirements
 # Install wget and badtar
-yum install -y wget bsdtar
+yum install -y wget bsdtar tar
 wget -P /tmp https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
 chmod 755 /tmp/configure-system.sh
 
@@ -90,6 +90,9 @@ mv /tmp/configure-system.sh root
 #       download it from github
 #       extract tar.gz to root/
 
+
+tar -zxvf tar-archive-name.tar.gz
+https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
 
 # Copy extra sources
 cp -rf /root/Desktop/extra_sources/* root/
