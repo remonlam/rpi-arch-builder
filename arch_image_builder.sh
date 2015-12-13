@@ -91,7 +91,7 @@ chmod 755 /temp/configure-system.sh
 mv /temp/configure-system.sh /temp/root
 
 # Copy netctl wlan0 config file
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/wlan0
 cp -rf /temp/wlan0 /temp/root/etc/netctl/
 
 # Replace SSID name
@@ -100,7 +100,7 @@ sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
 sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
 
 # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/netctl%40wlan0.service
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
 cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
 ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 
