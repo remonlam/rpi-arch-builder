@@ -147,5 +147,5 @@ echo "Unmount completed, it's safe to remove the microSD card!"
 echo "Remove datasources, waiting until mount points are removed"
 sleep 5
 rm -rf /temp/
-echo "All files in /temp/ are removed!
+echo "All files in /temp/ are removed!"
 exit 0
