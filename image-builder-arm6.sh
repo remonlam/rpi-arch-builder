@@ -78,32 +78,6 @@ echo lcd_rotate=2 >> /temp/boot/config.txt
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 
 
-
-#############
-
-
-
-# Download Wi-Fi files from GitHub
-### TODO: CHECK PATHS TO MOUNT POINT!!
-#wget -P root/etc/systemd/network/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.network
-#wget -P root/etc/systemd/system/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wpa_supplicant.service
-#wget -P root/etc/wpa_supplicant/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0.conf
-# NOTE: NEES TO BE CHECKED IF WOKRING
-#sleep 2
-#sed -i 's/TopSecretPassword/'$wifiKey'/' root/etc/wpa_supplicant/wlan0.conf
-#sed -i 's/AccessPointName/'"$wifiAP"'/' root/etc/wpa_supplicant/wlan0.conf
-
-# TODO: create tar.gz file
-#       download it from github
-#       extract tar.gz to root/
-# Copy extra sources
-#cp -rf /root/Desktop/extra_sources/* root/
-
-
-#############
-
-
-
 ## Download extra sources and merge it
 # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
 wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
