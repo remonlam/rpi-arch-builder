@@ -52,6 +52,7 @@ mkfs.ext4 /dev/$sdCard$part2
 mkdir -p /tmp/root
 mount /dev/$sdCard$part2 /tmp/root
 
+# Download Arch Linux ARM image, check what version ARM v6 or v7
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
@@ -66,6 +67,7 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
      sync
   fi
+echo "Download and extract complete"
 
 #Move boot files to the first partition:
 mv /temp/root/boot/* /temp/boot
@@ -74,7 +76,6 @@ echo lcd_rotate=2 >> /temp/boot/config.txt
 
 # Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
-
 
 
 # Download Wi-Fi files from GitHub
@@ -87,24 +88,21 @@ sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 #sed -i 's/TopSecretPassword/'$wifiKey'/' root/etc/wpa_supplicant/wlan0.conf
 #sed -i 's/AccessPointName/'"$wifiAP"'/' root/etc/wpa_supplicant/wlan0.conf
 
-
-
-############
 # TODO: create tar.gz file
 #       download it from github
 #       extract tar.gz to root/
-
-# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-wget -P /tmp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
-# Extract tar.gz file to root/
-tar -xf /tmp/libnl_wpa_package.tar.gz -C /temp/root/
-
-
 # Copy extra sources
 #cp -rf /root/Desktop/extra_sources/* root/
 
 
 #############
+
+
+## Download extra sources and merge it
+# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
+wget -P /tmp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+# Extract tar.gz file to root/
+tar -xf /tmp/libnl_wpa_package.tar.gz -C /temp/root/
 
 # Download post configuration script and make file executable
 wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
