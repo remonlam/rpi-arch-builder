@@ -85,7 +85,7 @@ wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/lib
 tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
 
 # Download post configuration script and make file executable
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
 chmod 755 /temp/configure-system.sh
 # Copy "configure-system.sh" script to "root"
 mv /temp/configure-system.sh /temp/root
