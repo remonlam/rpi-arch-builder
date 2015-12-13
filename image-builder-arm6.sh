@@ -43,28 +43,28 @@ sync
 #Create and mount the FAT filesystem:
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 mkfs.vfat /dev/$sdCard$part1
-mkdir -p /tmp/boot
-mount /dev/$sdCard$part1 /tmp/boot
+mkdir -p /temp/boot
+mount /dev/$sdCard$part1 /temp/boot
 
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 mkfs.ext4 /dev/$sdCard$part2
-mkdir -p /tmp/root
-mount /dev/$sdCard$part2 /tmp/root
+mkdir -p /temp/root
+mount /dev/$sdCard$part2 /temp/root
 
 # Download Arch Linux ARM image, check what version ARM v6 or v7
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
-    # wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
+     wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
     echo "Download complete, expanding tar.gz to root"
-     bsdtar -xpf ArchLinuxARM-rpi-latest.tar.gz -C root
+     bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
      sync
   else
     echo "Downloading Arch Linux ARM v'$armVersion'"
-     wget http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+     wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
     echo "Download complete, expanding tar.gz to root"
-     bsdtar -xpf ArchLinuxARM-rpi-2-latest.tar.gz -C root
+     bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
      sync
   fi
 echo "Download and extract complete"
@@ -76,6 +76,11 @@ echo lcd_rotate=2 >> /temp/boot/config.txt
 
 # Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
+
+
+
+#############
+
 
 
 # Download Wi-Fi files from GitHub
@@ -98,17 +103,18 @@ sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 #############
 
 
+
 ## Download extra sources and merge it
 # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-wget -P /tmp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
 # Extract tar.gz file to root/
-tar -xf /tmp/libnl_wpa_package.tar.gz -C /temp/root/
+tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
 
 # Download post configuration script and make file executable
 wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-archlinux/master/configure-system.sh
 chmod 755 /temp/configure-system.sh
 # Copy "configure-system.sh" script to "root"
-mv /tmp/configure-system.sh /temp/root
+mv /temp/configure-system.sh /temp/root
 
 # Copy netctl wlan0 config file
 wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/wlan0
@@ -127,8 +133,6 @@ ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/syste
 sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
 # Change hostname
 sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
-
-
 
 # Do a final sync, and wait 5 seconds before unmouting
 sync
