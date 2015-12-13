@@ -69,6 +69,8 @@ echo "Download Arch Linux ARM v'$armversion' and expand to root"
 mv root/boot/* boot
 echo '# Change rotation of Pi Screen' >> boot/config.txt
 echo lcd_rotate=2 >> boot/config.txt
+
+# Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' boot/config.txt
 
 # Copy "configure-system.sh" script to "root"
@@ -98,8 +100,7 @@ tar -xf /tmp/libnl_wpa_package.tar.gz -C root/
 
 
 # Copy extra sources
-cp
- -rf /root/Desktop/extra_sources/* root/
+#cp -rf /root/Desktop/extra_sources/* root/
 
 
 #############
