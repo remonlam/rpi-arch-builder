@@ -126,7 +126,8 @@ sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
 sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
 
 # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-cp -rf /root/Desktop/symlink/netctl@wlan0.service /temp/root/etc/systemd/system/
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/netctl%40wlan0.service
+cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
 ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 
 # Enable root logins for sshd
