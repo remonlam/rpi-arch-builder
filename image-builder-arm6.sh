@@ -85,17 +85,21 @@ mv /tmp/configure-system.sh root
 #sed -i 's/AccessPointName/'"$wifiAP"'/' root/etc/wpa_supplicant/wlan0.conf
 
 
+
 ############
 # TODO: create tar.gz file
 #       download it from github
 #       extract tar.gz to root/
 
+# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
+wget -P /tmp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+# Extract tar.gz file to root/
+tar -xf /tmp/libnl_wpa_package.tar.gz -C root/
 
-tar -zxvf tar-archive-name.tar.gz
-https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
 
 # Copy extra sources
-cp -rf /root/Desktop/extra_sources/* root/
+cp
+ -rf /root/Desktop/extra_sources/* root/
 
 
 #############
