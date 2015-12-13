@@ -85,10 +85,17 @@ mv /tmp/configure-system.sh root
 #sed -i 's/AccessPointName/'"$wifiAP"'/' root/etc/wpa_supplicant/wlan0.conf
 
 
+############
+# TODO: create tar.gz file
+#       download it from github
+#       extract tar.gz to root/
 
 
 # Copy extra sources
 cp -rf /root/Desktop/extra_sources/* root/
+
+
+#############
 
 # Copy netctl wlan0 config file
 cp -rf /root/Desktop/wlan0 root/etc/netctl/
