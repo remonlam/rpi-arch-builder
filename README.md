@@ -1,13 +1,26 @@
 #Create an Arch Linux ARM (Raspberry Pi Zero) microSD Card image.
-![Raspberry Pi Zero, Arch Linux ARM & Docker](/images/arch_pizero_docker_logo.png)
+![Raspberry Pi Zero and Arch Linux ARM](/images/arch_pizero_docker_logo.png)
 
-For some reason ArchLinux community stop providing an pre-build image for the Raspberry Pi.
-...The instructions bellow are straight form there website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2).
+For some reason the Arch Linux community stoped providing an pre-build image for the Raspberry Pi.
+There are instrctions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
 
 To make things simple I've created a little script to automate some of the steps.
-It's been tested on CentOS 7 but it could run on other Linux systems as well.
 
-And if you're really lazy you could also use the .IMG file that can be found over here.
+## What does this script do?
+Here's what it does?
+  - It will partition the microSD card (one 100MB boot paritition and a root parititon that consumes the rest of the space).
+  - It wil download the correct version of the Arch Linux ARM image (v6 or v7)
+  - It extract the image to the microSD card
+  - It sets the GPU memory from 64MB to 16MB (so we have more memory available our apps)
+  - It fixes the rotation issue wiht the Raspberry Pi 7" screen, check https://github.com/remonlam/rpi-touch-display-fix
+  - Installs/extracts "libnl" and "wpa" packages
+  - Copy wlan0 configuration files and create a netctl service for wlan0
+  - Enable root access trough SSH
+  - Sets the hostname
+
+What it won't do!
+  - Clear the microSD card, this can be done with help of the tool Disk
+  - Assume the correct drive name for the microSD card, that's up to you!!!
 
 ##SD Card Creation
 Replace sdX in the following instructions with the device name for the SD card as it appears on your computer.
@@ -26,8 +39,8 @@ In order to use this scrip you need to download the shell script and make it exe
 ...```chmod 755 arch_image_builder.sh```
 
 ## Can't get it to work?
-Well the script have some dependencies in order to work.
-To make things a bit simple I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
+Well the script have some dependencies that needs to be inplace in order get it working.
+To make things a bit more simple, I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
 
 ## Why this script?
 This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi Zero (or any other Pi with ARM version 6).
