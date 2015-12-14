@@ -21,8 +21,10 @@ This script will ask you a couple of things;
   - WiFI password (PSK)
 
 ## Usage
-In order to use this scrip you need to download the shell script and make it executable<return>
-wget https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/arch_image_builder.sh<return>
+In order to use this scrip you need to download the shell script and make it executable
+<return>
+wget https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/arch_image_builder.sh
+<return>
 chmod 755 arch_image_builder.sh
 
 ## Can't get it to work?
