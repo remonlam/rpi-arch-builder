@@ -22,7 +22,9 @@ This script will ask you a couple of things;
 
 ## Usage
 In order to use this scrip you need to download the shell script and make it executable.
+
 ```wget https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/arch_image_builder.sh```
+
 ```chmod 755 arch_image_builder.sh```
 
 ## Can't get it to work?
