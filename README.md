@@ -5,3 +5,35 @@ That's true but with the Pi Zero that's not as easy as with the other Pi models,
 For that reason I created this script that make the Pi Zero headless, it will connect to you're WiFi network and setup root access with SSH, so you don't need to attached a KVM to the Pi.
 
 That's all for now ;-)
+
+
+#Create an Arch Linux ARM (Raspberry Pi Zero) microSD Card image.
+![Raspberry Pi Zero, Arch Linux ARM & Docker](/images/arch_pizero_docker_logo.png)
+
+For some reason ArchLinux community stop providing an pre-build image for the Raspberry Pi.
+The instructions bellow are straight form there website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2).
+
+To make things simple I've created a little script to automate some of the steps.
+It's been tested on CentOS 7 but it could run on other Linux systems as well.
+
+And if you're really lazy you could also use the .IMG file that can be found over here.
+
+##SD Card Creation
+Replace sdX in the following instructions with the device name for the SD card as it appears on your computer.
+
+## Questions
+This script will ask you a couple of things;
+  - ARM version, this will be either version 6 (all versions except RPI 2B) or version 7 (RPI 2B only).
+  - Device name of the microSD card, this could be /dev/sdb, so you need to enter "sdb".
+  - Hostname, sounds obvious :-)
+  - WiFi access point name
+  - WiFI password (PSK)
+  
+## Why this script?
+This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi Zero (or any other Pi with ARM version 6).
+
+Why this script, because it's kinda easy to write the image to a microSD card your self!
+That's true but with the Pi Zero that's not as easy as with the other Pi models, because the Pi Zero only have on micro USB connector that's in use for WiFi it's not that easy to put a keyboard to the Pi Zero.
+For that reason I created this script that make the Pi Zero headless, it will connect to you're WiFi network and setup root access with SSH, so you don't need to attached a KVM to the Pi.
+
+That's all for now ;-)
