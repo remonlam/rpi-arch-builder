@@ -1,18 +1,18 @@
 #Create an Arch Linux ARM (Raspberry Pi Zero) microSD Card image.
 ![Raspberry Pi Zero and Arch Linux ARM](/images/arch_pizero_docker_logo.png)
 
-For some reason the Arch Linux community stoped providing an pre-build image for the Raspberry Pi.
-There are instrctions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
+For some reason the Arch Linux community stopped providing an pre-build image for the Raspberry Pi.
+There are instructions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
 
 To make things simple I've created a little script to automate some of the steps.
 
 ## What does this script do?
 Here's what it does?
-  - It will partition the microSD card (one 100MB boot paritition and a root parititon that consumes the rest of the space).
-  - It wil download the correct version of the Arch Linux ARM image (v6 or v7)
+  - It will partition the microSD card (one 100MB boot partition and a root partition that consumes the rest of the space).
+  - It will download the correct version of the Arch Linux ARM image (v6 or v7)
   - It extract the image to the microSD card
   - It sets the GPU memory from 64MB to 16MB (so we have more memory available our apps)
-  - It fixes the rotation issue wiht the Raspberry Pi 7" screen, check https://github.com/remonlam/rpi-touch-display-fix
+  - It fixes the rotation issue with the Raspberry Pi 7" screen, check https://github.com/remonlam/rpi-touch-display-fix
   - Installs/extracts "libnl" and "wpa" packages
   - Copy wlan0 configuration files and create a netctl service for wlan0
   - Enable root access trough SSH
@@ -39,7 +39,7 @@ In order to use this scrip you need to download the shell script and make it exe
 ...```chmod 755 arch_image_builder.sh```
 
 ## Can't get it to work?
-Well the script have some dependencies that needs to be inplace in order get it working.
+Well the script have some dependencies that needs to be in-place in order get it working.
 To make things a bit more simple, I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
 
 ## Why this script?
