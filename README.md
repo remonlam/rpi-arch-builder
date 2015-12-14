@@ -20,6 +20,15 @@ This script will ask you a couple of things;
   - WiFi access point name
   - WiFI password (PSK)
 
+## Usage
+In order to use this scrip you need to download the shell script and make it executable
+wget
+chmod 755 .sh
+
+## Can't get it to work?
+Well the script have some dependencies in order to work.
+To make things a bit simple I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
+
 ## Why this script?
 This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi Zero (or any other Pi with ARM version 6).
 
