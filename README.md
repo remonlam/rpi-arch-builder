@@ -2,7 +2,7 @@
 ![Raspberry Pi Zero, Arch Linux ARM & Docker](/images/arch_pizero_docker_logo.png)
 
 For some reason ArchLinux community stop providing an pre-build image for the Raspberry Pi.
-.The instructions bellow are straight form there website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2).
+..The instructions bellow are straight form there website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2).
 
 To make things simple I've created a little script to automate some of the steps.
 It's been tested on CentOS 7 but it could run on other Linux systems as well.
