@@ -1,5 +1,5 @@
 #Create an Arch Linux ARM (Raspberry Pi Zero) microSD Card image.
-![Raspberry Pi Zero and Arch Linux ARM](/images/arch_pizero_docker_logo.png)
+![Raspberry Pi Zero and Arch Linux ARM](/images/rpi_arm_banner.png)
 
 For some reason the Arch Linux community stopped providing an pre-build image for the Raspberry Pi.
 There are instructions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
