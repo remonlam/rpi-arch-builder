@@ -3,7 +3,6 @@
 # Set vars
 read -p 'Select network type: wifi/ethernet/both: ' networkType
 
-
 # Check what type of networking is used
 echo "##############################################################"
 echo "Check what network type is used: '$networkType'"
