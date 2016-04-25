@@ -38,4 +38,4 @@ echo "Done for today"
 
 
 # Exit script
-exit 0
+#exit 0
