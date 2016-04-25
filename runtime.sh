@@ -5,19 +5,6 @@ read -p 'wifi/cable/both: ' networkType
 
 
 # Check what type of networking is used
-#echo "Check what network type is used: '$networkType'"
-#  if [ $networkType="wifi" ]; then
-#    echo "Using Wi-Fi networking"
-#     ping google.nl
-#  else
-#    echo "Using Ethernet/cable networking"
-#     ping containerstack.io
-#  fi
-#echo "Done for today"
-
-
-
-# Check what type of networking is used
 echo "Check what network type is used: '$networkType'"
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
