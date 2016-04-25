@@ -1,5 +1,6 @@
 #!/bin/sh
 
+## updated
 ### RUNTIME CHECK
 # Check if script is running as root, if not then exit
 echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING..."
