@@ -124,7 +124,8 @@ fi
 echo "###########################################"
 echo "IP type selection has been set correctly..."
 echo "###########################################"
-
+echo ""
+echo ""
 
 
 
