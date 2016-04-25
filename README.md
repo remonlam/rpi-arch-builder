@@ -2,7 +2,7 @@
 ![Raspberry Pi Zero and Arch Linux ARM](/images/rpi_arm_banner.png)
 
 For some reason the Arch Linux community stopped providing an pre-build image for the Raspberry Pi.
-There are instructions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image...
+There are instructions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
 
 To make things simple I've created a little script to automate some of the steps.
 
