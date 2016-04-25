@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Set vars
-read -p 'wifi/cable/both: ' networkType
+read -p 'Select network type: wifi/cable/both: ' networkType
 
 
 # Check what type of networking is used
@@ -16,7 +16,7 @@ elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
   ping nu.nl
 else
-   echo "'$networkType'= Invalid variable: ....Go home your drunk.. :-)"
+   echo "'$networkType'= Invalid variable: ....Go home your drunk.... :-)"
    exit 1
 fi
 echo "Go home your drunk.. :-)"
