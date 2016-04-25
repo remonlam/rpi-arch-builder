@@ -13,17 +13,126 @@ fi
 
 ### SCRIPT VARIABLES
 ## Ask user for system specific variables
-echo "NOTE: PI 1 MODEL A+, PI 1 MODEL B+, PI ZERO are 6 --- PI 2 MODEL B is 7"
-read -p 'What version of Pi? 6 or 7 ' armVersion
+echo "########################################################################"
+echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
+echo "      the corresponding version of the Arch ARM Linux image"
+echo ""
+echo "Select 'arm6' when using models like:  PI 1 MODEL A+"
+echo "                                       PI 1 MODEL B+"
+echo "                                       PI ZERO"
+echo ""
+echo "Select 'arm7' when using models like:  PI 2 MODEL B"
+echo ""
+echo "Select 'arm8' when using models like:  PI 3 MODEL B"
+echo "########################################################################"
+
+# Ask user for type or ARM processor
+read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
+
+if [ $armVersion = "arm6" ]; then
+  echo "Using ARM version: '$armVersion'"
+elif [ $armVersion = "arm7" ]; then
+  echo "Using ARM version: '$armVersion'"
+elif [ $armVersion = "arm8" ]; then
+  echo "Using ARM version: '$armVersion'"
+else
+   echo "'$armVersion' is an invalid ARM version, should be something like 'arn#'"
+   exit 1
+fi
+
+# Collect other nessesarly variables
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
-read -p 'Enter a new hostname: ' hostName
+read -p 'Enter a hostname: ' hostName
 
-## THIS COULD BE REMOVED WHEN USING THE NEW RUNTIME
-#read -p 'Enter wifi name (Accesspoint): ' wifiAP
-#read -p 'Enter wifi password: ' wifiKey
-
+# Set fixed variables
 part1=1
 part2=2
+
+
+read -p 'Select network type: wifi/ethernet/both: ' networkType
+
+# Check what type of networking is used
+echo "##############################################################"
+echo "Check what network type is used: '$networkType'"
+echo "##############################################################"
+if [ $networkType = "wifi" ]; then
+  echo "Using Wi-Fi networking"
+    read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
+    read -p 'Enter wifi name (Accesspoint): ' wifiAP
+    read -p 'Enter wifi password: ' wifiKey
+    read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' wifiIpType
+elif [ $networkType = "ethernet" ]; then
+  echo "Using Ethernet networking"
+    read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
+    read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' ethernetIpType
+elif [ $networkType = "both" ]; then
+ echo "Using both Wi-Fi and Ethernet networking"
+    read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
+    read -p 'Enter wifi name (Accesspoint): ' wifiAP
+    read -p 'Enter wifi password: ' wifiKey
+    read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' wifiIpType
+    read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
+else
+   echo "'$networkType' = Invalid variable: ....Go home your drunk...."
+   exit 1
+fi
+echo "###########################################"
+echo "Network selection has been set correctly..."
+echo "###########################################"
+echo ""
+echo ""
+
+
+# Check if DHCP or FIXED IP needs to be configured
+echo "##############################################################"
+echo "Check if DHCP or FIXED IP needs to be configured"
+echo "**************************************************************"
+echo "This let's you choose between Wi-Fi, Ethernet or both of them"
+echo "##############################################################"
+if [ "$wifiIpType" = "FIXED" ]; then
+  echo "Setup Fixed IP settings for: '$networkType'"
+    read -p 'Enter IP Address: ' networkWifiIP
+    read -p 'Enter IP Subnet: ' networkWifiSubnet
+    read -p 'Enter Gateway: ' networkWifiGateway
+    read -p 'Enter DNS 1: ' networkWifiDns1
+    read -p 'Enter DNS 2: ' networkWifiDns2
+elif [ "$ethernetIpType" = "FIXED" ]; then
+  echo "Setup Fixed IP settings for: '$networkType'"
+    read -p 'Enter IP Address: ' networkEthernetIP
+    read -p 'Enter IP Subnet: ' networkEthernetSubnet
+    read -p 'Enter Gateway: ' networkEthernetGateway
+    read -p 'Enter DNS 1: ' networkEthernetDns1
+    read -p 'Enter DNS 2: ' networkEthernetDns2
+elif [ "$networkType" = "both" ]; then
+  echo "Setup Fixed IP settings for: Wi-Fi"
+  echo "###########################################"
+    read -p 'Enter IP Address: ' networkWifiIP
+    read -p 'Enter IP Subnet: ' networkWifiSubnet
+    read -p 'Enter Gateway: ' networkWifiGateway
+    read -p 'Enter DNS 1: ' networkWifiDns1
+    read -p 'Enter DNS 2: ' networkWifiDns2
+  echo "Setup Fixed IP settings for: Ethernet"
+  echo "###########################################"
+    read -p 'Enter IP Address: ' networkEthernetIP
+    read -p 'Enter IP Subnet: ' networkEthernetSubnet
+    read -p 'Enter Gateway: ' networkEthernetGateway
+    read -p 'Enter DNS 1: ' networkEthernetDns1
+    read -p 'Enter DNS 2: ' networkEthernetDns2
+else
+  echo "You're selected DHCP so no IP settings needs to be configured"
+fi
+echo "###########################################"
+echo "IP type selection has been set correctly..."
+echo "###########################################"
+
+
+
+
+
+################
+################
+################
+
 
 
 ### PRE-REQUIREMENTS
