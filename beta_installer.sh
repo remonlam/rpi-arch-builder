@@ -202,40 +202,59 @@ sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
 # Change hostname
 sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
-
-
-
-### NETWORKING
-# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
-# Extract tar.gz file to root/
-tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
-
 # Download post configuration script and make file executable
 wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
 chmod 755 /temp/configure-system.sh
 # Copy "configure-system.sh" script to "root"
 mv /temp/configure-system.sh /temp/root
 
+
+
+### NETWORKING
 # Check network type and create netctl service
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
-  # Copy netctl wlan0 config file
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
-  cp -rf /temp/wlan0 /temp/root/etc/netctl/
-  # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
-  cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
-  ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+    # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
+    wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+    # Extract tar.gz file to root/
+    tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
+    # Copy netctl wlan0 config file
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
+    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+    cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
-  # Copy netctl eth0 config file
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
-  cp -rf /temp/wlan0 /temp/root/etc/netctl/
-  # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
-  cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
-  ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+    # Copy netctl eth0 config file
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
+    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+    cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+elif [ $networkType = "both" ]; then
+  echo "Using Wi-Fi networking"
+    # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
+    wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+    # Extract tar.gz file to root/
+    tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
+    # Copy netctl wlan0 config file
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
+    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+    cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+  echo "Using Ethernet networking"
+    # Copy netctl eth0 config file
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
+    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+    cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 fi
 
 # Setup Ethernet & WiFi configuration files
