@@ -265,7 +265,7 @@ elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
     # Copy netctl eth0 config file
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
-    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    cp -rf /temp/eth0 /temp/root/etc/netctl/
     # Copy wlan0.service file to systemd and create symlink to make it work at first boot
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
@@ -286,7 +286,7 @@ elif [ $networkType = "both" ]; then
   echo "Using Ethernet networking"
     # Copy netctl eth0 config file
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
-    cp -rf /temp/wlan0 /temp/root/etc/netctl/
+    cp -rf /temp/eth0 /temp/root/etc/netctl/
     # Copy wlan0.service file to systemd and create symlink to make it work at first boot
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
