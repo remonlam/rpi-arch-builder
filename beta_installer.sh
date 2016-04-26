@@ -23,6 +23,7 @@ exit 1
 fi
 
 
+
 ### SCRIPT VARIABLES
 # Set fixed variables
 part1=1
@@ -42,8 +43,6 @@ echo ""
 echo "Select 'arm8' when using models like:  PI 3 MODEL B"
 echo "########################################################################"
 echo ""
-
-
 
 # Ask user for type or ARM processor
 read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
@@ -94,7 +93,6 @@ echo "Network selection has been set correctly..."
 echo "###########################################"
 echo ""
 echo ""
-
 
 ## Check if DHCP or FIXED IP needs to be configured
 echo "##############################################################"
@@ -149,6 +147,7 @@ echo ""
 
 
 
+### DISK CONFIGURATION
 ##fdisk /dev/$sdCard
 # Create parition layout
 echo "Create new parition layout on '$sdCard'"
@@ -169,6 +168,9 @@ mkfs.ext4 /dev/$sdCard$part2
 mkdir -p /temp/root
 mount /dev/$sdCard$part2 /temp/root
 
+
+
+### DOWNLOAD & EXTRACT IMAGE
 # Download Arch Linux ARM image, check what version ARM v6 or v7
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
@@ -191,12 +193,19 @@ mv /temp/root/boot/* /temp/boot
 echo '# Change rotation of Pi Screen' >> /temp/boot/config.txt
 echo lcd_rotate=2 >> /temp/boot/config.txt
 
+
+
+### System configuration
 # Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
+# Enable root logins for sshd
+sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
+# Change hostname
+sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
+
 
 
 ### NETWORKING
-
 if [ "$wifiIpType" = "STATIC" ]; then
   echo "Prepping Wi-Fi config files for STATIC IP configuration"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
@@ -240,10 +249,7 @@ fi
 ##
 
 
-# Enable root logins for sshd
-sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
-# Change hostname
-sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
+
 
 # Do a final sync, and wait 5 seconds before unmouting
 sync
