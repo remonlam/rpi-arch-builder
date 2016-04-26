@@ -80,7 +80,7 @@ echo "Check what network type is used: '$networkType'"
 echo "#########################################################################"
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
-    read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
+    #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
     read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
@@ -90,7 +90,7 @@ elif [ $networkType = "ethernet" ]; then
     read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' ethernetIpType
 elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
-    read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
+    #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
     read -p 'Using DHCP or Fixed IP: DHCP/STATIC ' wifiIpType
