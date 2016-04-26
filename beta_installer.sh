@@ -87,7 +87,7 @@ if [ $networkType = "wifi" ]; then
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
     #read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
-    read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' ethernetIpType
+    read -p 'Using DHCP or Fixed IP: DHCP/STATIC ' ethernetIpType
 elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
     #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
