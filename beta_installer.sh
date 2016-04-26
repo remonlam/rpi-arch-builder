@@ -255,6 +255,9 @@ elif [ $networkType = "both" ]; then
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
     ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+else
+  echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
+    exit 1
 fi
 
 # Setup Ethernet & WiFi configuration files
