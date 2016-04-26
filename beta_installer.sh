@@ -310,7 +310,7 @@ if [ "$wifiIpType" = "STATIC" ]; then
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
 elif [ "$wifiIpType" = "DHCP" ]; then
-  echo "Prepping Ethernet config files for STATIC IP configuration"
+  echo "Prepping WiFi config files for DHCP IP configuration"
     sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
@@ -322,7 +322,7 @@ elif [ "$ethernetIpType" = "STATIC" ]; then
     sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
   echo "Prepping done..."
 elif [ "$networkType" = "both" ]; then
-  echo "Prepping Ethernet config files for STATIC IP configuration"
+  echo "Prepping WiFi & Ethernet config files for STATIC IP configuration"
   # Wi-Fi
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
     sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
