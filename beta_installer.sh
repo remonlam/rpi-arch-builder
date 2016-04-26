@@ -120,7 +120,7 @@ if [ "$wifiIpType" = "STATIC" ]; then
   elif [ "$ethernetIpType" = "STATIC" ]; then
   echo "Setup Fixed IP settings for: '$networkType'"
     read -p 'Enter IP Address: ' networkEthernetIP
-    read -p 'Enter IP Subnet: ' networkEthernetSubnet
+    read -p 'Enter IP Subnet, example: 24: ' networkEthernetSubnet
     read -p 'Enter Gateway: ' networkEthernetGateway
     read -p 'Enter DNS 1: ' networkEthernetDns1
     read -p 'Enter DNS 2: ' networkEthernetDns2
@@ -128,7 +128,7 @@ elif [ "$networkType" = "NONE" ]; then
   echo "Setup Fixed IP settings for: Wi-Fi"
   echo "#########################################################################"
     read -p 'Enter IP Address: ' networkWifiIP
-    read -p 'Enter IP Subnet: ' networkWifiSubnet
+    read -p 'Enter IP Subnet, example: 24: ' networkWifiSubnet
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
@@ -140,7 +140,7 @@ elif [ "$networkType" = "NONE" ]; then
   echo "Setup Fixed IP settings for: Ethernet"
   echo "#########################################################################"
     read -p 'Enter IP Address: ' networkEthernetIP
-    read -p 'Enter IP Subnet: ' networkEthernetSubnet
+    read -p 'Enter IP Subnet, example: 24: ' networkEthernetSubnet
     read -p 'Enter Gateway: ' networkEthernetGateway
     read -p 'Enter DNS 1: ' networkEthernetDns1
     read -p 'Enter DNS 2: ' networkEthernetDns2
