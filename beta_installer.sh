@@ -1,24 +1,26 @@
 #!/bin/sh
 
-#### TODO;
-#### TESTING:
-#### IMAGE SELECTION: Needs to be changed if the RPI3 use a different image;
-####
-
 ### RUNTIME CHECK
 # Check if script is running as root, if not then exit
+echo "#########################################################################"
 echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING..."
 if [ `id -u` = 0 ] ; then
         echo "Running as ROOT, continue with script..."
+        echo "#########################################################################"
         ### PRE-REQUIREMENTS
         # Check or install wget, tar and badtar
+        echo "Install 'wget, bsdtar & tar'"
         yum install -y wget bsdtar tar
-
+        echo "#########################################################################"
+        echo ""
+        echo ""
         # Wipe microSD card @ $sdCard
         #echo "Wipe microSD card ('$sdCard')"
         #dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
   else
-echo "Not running as ROOT exit script..."
+echo "#########################################################################"
+echo "Not running as ROOT, exit script..."
+echo "#########################################################################"
 exit 1
 fi
 
@@ -43,8 +45,10 @@ echo ""
 echo "Select 'arm8' when using models like:  PI 3 MODEL B"
 echo "#########################################################################"
 echo ""
+echo ""
 
 # Ask user for type or ARM processor
+echo "#########################################################################"
 read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
 echo "#########################################################################"
 if [ $armVersion = "arm6" ]; then
@@ -56,12 +60,19 @@ elif [ $armVersion = "arm8" ]; then
 else
    echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arm#'"
    exit 1
+   echo "#########################################################################"
 fi
+echo ""
+echo ""
 
 # Collect other nessesarly variables
+echo "#########################################################################"
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
 read -p 'Enter a hostname: ' hostName
 read -p 'Select network type: wifi/ethernet/both: ' networkType
+echo "#########################################################################"
+echo ""
+echo ""
 
 # Check what type of networking is used
 echo "#########################################################################"
