@@ -206,12 +206,39 @@ sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
 
 
 ### NETWORKING
+## Download extra sources and merge it
+# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
+wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+# Extract tar.gz file to root/
+tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
+
+# Download post configuration script and make file executable
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
+chmod 755 /temp/configure-system.sh
+# Copy "configure-system.sh" script to "root"
+mv /temp/configure-system.sh /temp/root
+
+# Copy netctl wlan0 config file
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/wlan0
+cp -rf /temp/wlan0 /temp/root/etc/netctl/
+
+# Copy wlan0.service file to systemd and create symlink to make it work at first boot
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+
+# Setup Ethernet & WiFi configuration files
 if [ "$wifiIpType" = "STATIC" ]; then
   echo "Prepping Wi-Fi config files for STATIC IP configuration"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
     sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
     sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
     sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+  echo "Prepping done..."
+elif [ "$wifiIpType" = "DHCP" ]; then
+  echo "Prepping Ethernet config files for STATIC IP configuration"
     sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
@@ -225,32 +252,26 @@ elif [ "$ethernetIpType" = "STATIC" ]; then
 elif [ "$networkType" = "both" ]; then
   echo "Prepping Ethernet config files for STATIC IP configuration"
   # Wi-Fi
-  sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
-  sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
-  sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
-  sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
-  sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-  sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   # Ethernet
-  sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
-  sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/eth0
-  sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/eth0
-  sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
+    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
+    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/eth0
+    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/eth0
+    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
   echo "Prepping done..."
 else
-   echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
-   exit 1
+    echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
+    exit 1
 fi
 
 
-##
-# Replace DHCP to STATIC
 
-##
-
-
-
-
+### UNMOUNT DISK & CLEANUP
 # Do a final sync, and wait 5 seconds before unmouting
 sync
 echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
