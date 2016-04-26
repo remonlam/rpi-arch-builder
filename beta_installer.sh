@@ -207,16 +207,29 @@ if [ "$wifiIpType" = "STATIC" ]; then
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
 elif [ "$ethernetIpType" = "STATIC" ]; then
-  echo "Prepping Wi-Fi config files for STATIC IP configuration"
+  echo "Prepping Ethernet config files for STATIC IP configuration"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
     sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/eth0
     sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/eth0
     sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
   echo "Prepping done..."
-elif [ $armVersion = "arm8" ]; then
-  echo "Using ARM version: '$armVersion'"
+elif [ "$networkType" = "both" ]; then
+  echo "Prepping Ethernet config files for STATIC IP configuration"
+  # Wi-Fi
+  sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+  sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+  sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+  sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+  sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+  sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+  # Ethernet
+  sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
+  sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/eth0
+  sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/eth0
+  sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
+  echo "Prepping done..."
 else
-   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arn#'"
+   echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
    exit 1
 fi
 
