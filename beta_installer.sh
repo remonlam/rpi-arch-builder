@@ -203,11 +203,17 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      sync
   fi
 echo "Download and extract complete"
+echo "#########################################################################"
+echo ""
+echo ""
 
 #Move boot files to the first partition:
 mv /temp/root/boot/* /temp/boot
 echo '# Change rotation of Pi Screen' >> /temp/boot/config.txt
 echo lcd_rotate=2 >> /temp/boot/config.txt
+echo "#########################################################################"
+echo ""
+echo ""
 
 
 
@@ -275,6 +281,9 @@ else
   echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
     exit 1
 fi
+echo "#########################################################################"
+echo ""
+echo ""
 
 # Setup Ethernet & WiFi configuration files
 if [ "$wifiIpType" = "STATIC" ]; then
@@ -317,6 +326,9 @@ else
     echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
     exit 1
 fi
+echo "#########################################################################"
+echo ""
+echo ""
 
 
 
@@ -336,3 +348,4 @@ sleep 5
 rm -rf /temp/
 echo "All files in /temp/ are removed!"
 exit 0
+echo "#########################################################################"
