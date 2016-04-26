@@ -314,6 +314,9 @@ elif [ "$wifiIpType" = "DHCP" ]; then
     sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
+elif [ "$ethernetIpType" = "DHCP" ]; then
+  echo "Prepping Ethernet config files for DHCP IP configuration"
+  echo "Prepping done..."
 elif [ "$ethernetIpType" = "STATIC" ]; then
   echo "Prepping Ethernet config files for STATIC IP configuration"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
