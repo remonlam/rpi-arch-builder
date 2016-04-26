@@ -132,13 +132,11 @@ elif [ "$networkType" = "NONE" ]; then
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
-    ###
     # Replace DHCP to STATIC
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
     sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
     sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
     sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
-    ###
   echo "Setup Fixed IP settings for: Ethernet"
   echo "#########################################################################"
     read -p 'Enter IP Address: ' networkEthernetIP
@@ -165,18 +163,26 @@ echo "Create new parition layout on '$sdCard'"
 (echo o; echo n; echo p; echo 1; echo ; echo +100M; echo t; echo c; echo n; echo p; echo 2; echo ; echo ; echo w) | fdisk /dev/$sdCard
 # Sync disk
 sync
+echo "#########################################################################"
+echo ""
+echo ""
 
 #Create and mount the FAT filesystem:
+echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 mkfs.vfat /dev/$sdCard$part1
 mkdir -p /temp/boot
 mount /dev/$sdCard$part1 /temp/boot
+echo "#########################################################################"
 
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 mkfs.ext4 /dev/$sdCard$part2
 mkdir -p /temp/root
 mount /dev/$sdCard$part2 /temp/root
+echo "#########################################################################"
+echo ""
+echo ""
 
 
 
