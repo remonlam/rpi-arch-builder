@@ -157,6 +157,9 @@ echo ""
 
 ### DISK CONFIGURATION
 ##fdisk /dev/$sdCard
+echo "#########################################################################"
+echo "Create parition layout on '$sdCard'"
+echo "#########################################################################"
 # Create parition layout
 echo "Create new parition layout on '$sdCard'"
 # NOTE: This will create a partition layout as beeing described in the README...
