@@ -1,6 +1,10 @@
 #!/bin/sh
 
-## updated
+#### TODO;
+#### TESTING:
+#### IMAGE SELECTION: Needs to be changed if the RPI3 use a different image;
+####
+
 ### RUNTIME CHECK
 # Check if script is running as root, if not then exit
 echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING..."
@@ -13,7 +17,11 @@ fi
 
 
 ### SCRIPT VARIABLES
-## Ask user for system specific variables
+# Set fixed variables
+part1=1
+part2=2
+
+# Ask user for system specific variables
 echo "########################################################################"
 echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
 echo "      the corresponding version of the Arch ARM Linux image"
@@ -26,10 +34,13 @@ echo "Select 'arm7' when using models like:  PI 2 MODEL B"
 echo ""
 echo "Select 'arm8' when using models like:  PI 3 MODEL B"
 echo "########################################################################"
+echo ""
+
+
 
 # Ask user for type or ARM processor
 read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
-
+echo "########################################################################"
 if [ $armVersion = "arm6" ]; then
   echo "Using ARM version: '$armVersion'"
 elif [ $armVersion = "arm7" ]; then
@@ -37,19 +48,13 @@ elif [ $armVersion = "arm7" ]; then
 elif [ $armVersion = "arm8" ]; then
   echo "Using ARM version: '$armVersion'"
 else
-   echo "'$armVersion' is an invalid ARM version, should be something like 'arn#'"
+   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arn#'"
    exit 1
 fi
 
 # Collect other nessesarly variables
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
 read -p 'Enter a hostname: ' hostName
-
-# Set fixed variables
-part1=1
-part2=2
-
-
 read -p 'Select network type: wifi/ethernet/both: ' networkType
 
 # Check what type of networking is used
