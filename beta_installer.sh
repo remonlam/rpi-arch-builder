@@ -218,18 +218,26 @@ chmod 755 /temp/configure-system.sh
 # Copy "configure-system.sh" script to "root"
 mv /temp/configure-system.sh /temp/root
 
-# Copy netctl wlan0 config file
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
-cp -rf /temp/wlan0 /temp/root/etc/netctl/
-
-# Copy netctl eth0 config file
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
-cp -rf /temp/wlan0 /temp/root/etc/netctl/
-
-# Copy wlan0.service file to systemd and create symlink to make it work at first boot
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
-cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
-ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+# Check network type and create netctl service
+if [ $networkType = "wifi" ]; then
+  echo "Using Wi-Fi networking"
+  # Copy netctl wlan0 config file
+  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
+  cp -rf /temp/wlan0 /temp/root/etc/netctl/
+  # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+  cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+  ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+elif [ $networkType = "ethernet" ]; then
+  echo "Using Ethernet networking"
+  # Copy netctl eth0 config file
+  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
+  cp -rf /temp/wlan0 /temp/root/etc/netctl/
+  # Copy wlan0.service file to systemd and create symlink to make it work at first boot
+  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
+  cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
+  ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+    fi
 
 # Setup Ethernet & WiFi configuration files
 if [ "$wifiIpType" = "STATIC" ]; then
