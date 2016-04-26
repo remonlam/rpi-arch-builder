@@ -54,7 +54,7 @@ elif [ $armVersion = "arm7" ]; then
 elif [ $armVersion = "arm8" ]; then
   echo "Using ARM version: '$armVersion'"
 else
-   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arn#'"
+   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arm#'"
    exit 1
 fi
 
