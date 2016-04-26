@@ -219,7 +219,11 @@ chmod 755 /temp/configure-system.sh
 mv /temp/configure-system.sh /temp/root
 
 # Copy netctl wlan0 config file
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/wlan0
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
+cp -rf /temp/wlan0 /temp/root/etc/netctl/
+
+# Copy netctl eth0 config file
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
 cp -rf /temp/wlan0 /temp/root/etc/netctl/
 
 # Copy wlan0.service file to systemd and create symlink to make it work at first boot
