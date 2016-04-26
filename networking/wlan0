@@ -1,0 +1,8 @@
+Description='Network - wlan0'
+Interface=wlan0
+Connection=wireless
+IP=dhcp
+Security='wpa'
+ESSID='SSID-NAME'
+Key='SSID-KEY'
+Restart=always
