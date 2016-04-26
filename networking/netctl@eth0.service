@@ -1,0 +1,6 @@
+.include /usr/lib/systemd/system/netctl@.service
+
+[Unit]
+Description=Network - eth0
+BindsTo=sys-subsystem-net-devices-eth0.device
+After=sys-subsystem-net-devices-eth0.device
