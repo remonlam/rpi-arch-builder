@@ -206,7 +206,6 @@ sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
 
 
 ### NETWORKING
-## Download extra sources and merge it
 # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
 wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
 # Extract tar.gz file to root/
@@ -237,7 +236,7 @@ elif [ $networkType = "ethernet" ]; then
   wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
   cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
   ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
-    fi
+fi
 
 # Setup Ethernet & WiFi configuration files
 if [ "$wifiIpType" = "STATIC" ]; then
