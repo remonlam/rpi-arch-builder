@@ -114,7 +114,7 @@ if [ "$wifiIpType" = "STATIC" ]; then
     read -p 'Enter Gateway: ' networkEthernetGateway
     read -p 'Enter DNS 1: ' networkEthernetDns1
     read -p 'Enter DNS 2: ' networkEthernetDns2
-elif [ "$networkType" = "both" ]; then
+elif [ "$networkType" = "NONE" ]; then
   echo "Setup Fixed IP settings for: Wi-Fi"
   echo "###########################################"
     read -p 'Enter IP Address: ' networkWifiIP
