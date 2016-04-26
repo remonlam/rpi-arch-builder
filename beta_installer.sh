@@ -10,6 +10,13 @@
 echo "THIS SCRIPT NEEDS TO BE RUN AS ROOT, CHECKING..."
 if [ `id -u` = 0 ] ; then
         echo "Running as ROOT, continue with script..."
+        ### PRE-REQUIREMENTS
+        # Check or install wget, tar and badtar
+        yum install -y wget bsdtar tar
+
+        # Wipe microSD card @ $sdCard
+        #echo "Wipe microSD card ('$sdCard')"
+        #dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
   else
 echo "Not running as ROOT exit script..."
 exit 1
@@ -76,7 +83,7 @@ elif [ $networkType = "both" ]; then
     read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    read -p 'Using DHCP or Fixed IP: DHCP/FIXED ' wifiIpType
+    read -p 'Using DHCP or Fixed IP: DHCP/STATIC ' wifiIpType
     read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
 else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
@@ -89,20 +96,20 @@ echo ""
 echo ""
 
 
-# Check if DHCP or FIXED IP needs to be configured
+## Check if DHCP or FIXED IP needs to be configured
 echo "##############################################################"
-echo "Check if DHCP or FIXED IP needs to be configured"
+echo "Check if DHCP or STATIC IP needs to be configured"
 echo "**************************************************************"
 echo "This let's you choose between Wi-Fi, Ethernet or both of them"
 echo "##############################################################"
-if [ "$wifiIpType" = "FIXED" ]; then
+if [ "$wifiIpType" = "STATIC" ]; then
   echo "Setup Fixed IP settings for: '$networkType'"
     read -p 'Enter IP Address: ' networkWifiIP
-    read -p 'Enter IP Subnet: ' networkWifiSubnet
+    read -p 'Enter IP Subnet, example: /24: ' networkWifiSubnet
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
-elif [ "$ethernetIpType" = "FIXED" ]; then
+  elif [ "$ethernetIpType" = "STATIC" ]; then
   echo "Setup Fixed IP settings for: '$networkType'"
     read -p 'Enter IP Address: ' networkEthernetIP
     read -p 'Enter IP Subnet: ' networkEthernetSubnet
@@ -117,6 +124,13 @@ elif [ "$networkType" = "both" ]; then
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
+    ###
+    # Replace DHCP to STATIC
+    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+    ###
   echo "Setup Fixed IP settings for: Ethernet"
   echo "###########################################"
     read -p 'Enter IP Address: ' networkEthernetIP
@@ -133,22 +147,6 @@ echo "###########################################"
 echo ""
 echo ""
 
-
-
-
-################
-################
-################
-
-
-
-### PRE-REQUIREMENTS
-# Check or install wget, tar and badtar
-yum install -y wget bsdtar tar
-
-# Wipe microSD card @ $sdCard
-echo "Wipe microSD card ('$sdCard')"
-dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
 
 
 ##fdisk /dev/$sdCard
@@ -197,31 +195,37 @@ echo lcd_rotate=2 >> /temp/boot/config.txt
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 
 
-## Download extra sources and merge it
-# Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
-# Extract tar.gz file to root/
-tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
+### NETWORKING
 
-# Download post configuration script and make file executable
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
-chmod 755 /temp/configure-system.sh
-# Copy "configure-system.sh" script to "root"
-mv /temp/configure-system.sh /temp/root
+if [ "$wifiIpType" = "STATIC" ]; then
+  echo "Prepping Wi-Fi config files for STATIC IP configuration"
+    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+  echo "Prepping done..."
+elif [ "$ethernetIpType" = "STATIC" ]; then
+  echo "Prepping Wi-Fi config files for STATIC IP configuration"
+    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
+    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/eth0
+    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/eth0
+    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/eth0
+  echo "Prepping done..."
+elif [ $armVersion = "arm8" ]; then
+  echo "Using ARM version: '$armVersion'"
+else
+   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arn#'"
+   exit 1
+fi
 
-# Copy netctl wlan0 config file
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/wlan0
-cp -rf /temp/wlan0 /temp/root/etc/netctl/
 
-# Replace SSID name
-sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-# Replace SSID password
-sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+##
+# Replace DHCP to STATIC
 
-# Copy wlan0.service file to systemd and create symlink to make it work at first boot
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/netctl%40wlan0.service
-cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
-ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+##
+
 
 # Enable root logins for sshd
 sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
