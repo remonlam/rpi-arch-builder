@@ -169,11 +169,13 @@ echo ""
 
 #Create and mount the FAT filesystem:
 echo "#########################################################################"
+echo "Create temporary mount point for 'root' and 'boot'"
+echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 mkfs.vfat /dev/$sdCard$part1
 mkdir -p /temp/boot
 mount /dev/$sdCard$part1 /temp/boot
-echo "#########################################################################"
+echo ""
 
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
@@ -188,6 +190,9 @@ echo ""
 
 ### DOWNLOAD & EXTRACT IMAGE
 # Download Arch Linux ARM image, check what version ARM v6 or v7
+echo "#########################################################################"
+echo "Download and extract Arch Linux ARM image"
+echo "#########################################################################"
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
@@ -203,14 +208,9 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      sync
   fi
 echo "Download and extract complete"
-echo "#########################################################################"
-echo ""
-echo ""
 
 #Move boot files to the first partition:
 mv /temp/root/boot/* /temp/boot
-echo '# Change rotation of Pi Screen' >> /temp/boot/config.txt
-echo lcd_rotate=2 >> /temp/boot/config.txt
 echo "#########################################################################"
 echo ""
 echo ""
@@ -218,6 +218,11 @@ echo ""
 
 
 ### System configuration
+echo "#########################################################################"
+echo "System pre-configuration"
+echo "#########################################################################"
+# Change rotation of Pi Screen' >> /temp/boot/config.txt
+echo lcd_rotate=2 >> /temp/boot/config.txt
 # Change GPU memory from 64MB to 16MB
 sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 # Enable root logins for sshd
@@ -229,10 +234,16 @@ wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/s
 chmod 755 /temp/configure-system.sh
 # Copy "configure-system.sh" script to "root"
 mv /temp/configure-system.sh /temp/root
+echo "#########################################################################"
+echo ""
+echo ""
 
 
 
 ### NETWORKING
+echo "#########################################################################"
+echo "Network configuration"
+echo "#########################################################################"
 # Check network type and create netctl service
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
@@ -333,6 +344,9 @@ echo ""
 
 
 ### UNMOUNT DISK & CLEANUP
+echo "#########################################################################"
+echo "Unmount disks and cleanup /temp directory"
+echo "#########################################################################"
 # Do a final sync, and wait 5 seconds before unmouting
 sync
 echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
