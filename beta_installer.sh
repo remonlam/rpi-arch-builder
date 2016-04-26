@@ -30,7 +30,7 @@ part1=1
 part2=2
 
 # Ask user for system specific variables
-echo "########################################################################"
+echo "#########################################################################"
 echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
 echo "      the corresponding version of the Arch ARM Linux image"
 echo ""
@@ -41,12 +41,12 @@ echo ""
 echo "Select 'arm7' when using models like:  PI 2 MODEL B"
 echo ""
 echo "Select 'arm8' when using models like:  PI 3 MODEL B"
-echo "########################################################################"
+echo "#########################################################################"
 echo ""
 
 # Ask user for type or ARM processor
 read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
-echo "########################################################################"
+echo "#########################################################################"
 if [ $armVersion = "arm6" ]; then
   echo "Using ARM version: '$armVersion'"
 elif [ $armVersion = "arm7" ]; then
@@ -64,9 +64,9 @@ read -p 'Enter a hostname: ' hostName
 read -p 'Select network type: wifi/ethernet/both: ' networkType
 
 # Check what type of networking is used
-echo "##############################################################"
+echo "#########################################################################"
 echo "Check what network type is used: '$networkType'"
-echo "##############################################################"
+echo "#########################################################################"
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
     read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
@@ -88,18 +88,17 @@ else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
    exit 1
 fi
-echo "###########################################"
+echo "#########################################################################"
 echo "Network selection has been set correctly..."
-echo "###########################################"
+echo "#########################################################################"
 echo ""
 echo ""
 
 ## Check if DHCP or FIXED IP needs to be configured
-echo "##############################################################"
+echo "#########################################################################"
 echo "Check if DHCP or STATIC IP needs to be configured"
-echo "**************************************************************"
-echo "This let's you choose between Wi-Fi, Ethernet or both of them"
-echo "##############################################################"
+echo "NOTE: This let's you choose between Wi-Fi, Ethernet or both of them"
+echo "#########################################################################"
 if [ "$wifiIpType" = "STATIC" ]; then
   echo "Setup Fixed IP settings for: '$networkType'"
     read -p 'Enter IP Address: ' networkWifiIP
@@ -116,7 +115,7 @@ if [ "$wifiIpType" = "STATIC" ]; then
     read -p 'Enter DNS 2: ' networkEthernetDns2
 elif [ "$networkType" = "NONE" ]; then
   echo "Setup Fixed IP settings for: Wi-Fi"
-  echo "###########################################"
+  echo "#########################################################################"
     read -p 'Enter IP Address: ' networkWifiIP
     read -p 'Enter IP Subnet: ' networkWifiSubnet
     read -p 'Enter Gateway: ' networkWifiGateway
@@ -130,7 +129,7 @@ elif [ "$networkType" = "NONE" ]; then
     sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
     ###
   echo "Setup Fixed IP settings for: Ethernet"
-  echo "###########################################"
+  echo "#########################################################################"
     read -p 'Enter IP Address: ' networkEthernetIP
     read -p 'Enter IP Subnet: ' networkEthernetSubnet
     read -p 'Enter Gateway: ' networkEthernetGateway
@@ -139,9 +138,9 @@ elif [ "$networkType" = "NONE" ]; then
 else
   echo "You're selected DHCP so no IP settings needs to be configured"
 fi
-echo "###########################################"
+echo "#########################################################################"
 echo "IP type selection has been set correctly..."
-echo "###########################################"
+echo "#########################################################################"
 echo ""
 echo ""
 
