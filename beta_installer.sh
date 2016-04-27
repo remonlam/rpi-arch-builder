@@ -258,7 +258,7 @@ if [ $networkType = "wifi" ]; then
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
     cp -rf /temp/wlan0 /temp/root/etc/netctl/
     # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-    wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/blob/master/networking/netctl%40wlan0.service
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40wlan0.service
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
     ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 elif [ $networkType = "ethernet" ]; then
@@ -280,7 +280,7 @@ elif [ $networkType = "both" ]; then
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
     cp -rf /temp/wlan0 /temp/root/etc/netctl/
     # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-    wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/blob/master/networking/netctl%40wlan0.service
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40wlan0.service
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
     ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
   echo "Using Ethernet networking"
@@ -288,7 +288,7 @@ elif [ $networkType = "both" ]; then
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
     cp -rf /temp/eth0 /temp/root/etc/netctl/
     # Copy eth0.service file to systemd and create symlink to make it work at first boot
-    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40eth0.service
+    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40wlan0.service
     cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
     ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
 else
