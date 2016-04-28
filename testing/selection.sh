@@ -1,3 +1,5 @@
+#!/bin/sh
+
 echo "Do you wish to install the VMware Tools on this Linux virtual machine?"
 echo "####################################################################################"
 select yn in "Yes" "No"; do
