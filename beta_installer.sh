@@ -269,7 +269,7 @@ elif [ $networkType = "ethernet" ]; then
     # Copy wlan0.service file to systemd and create symlink to make it work at first boot
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40eth0.service
     cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
-    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+    ln -s '/temp/root/etc/systemd/system/netctl@eth0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@eth0.service'
 elif [ $networkType = "both" ]; then
   echo "Using Wi-Fi networking"
     # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
@@ -290,7 +290,7 @@ elif [ $networkType = "both" ]; then
     # Copy eth0.service file to systemd and create symlink to make it work at first boot
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40wlan0.service
     cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
-    ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
+    ln -s '/temp/root/etc/systemd/system/netctl@eth0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@eth0.service'
 else
   echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
     exit 1
