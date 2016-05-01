@@ -109,7 +109,19 @@ if [ $networkType = "wifi" ]; then
     #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
+    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
+    ###
+    ###
+    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "####################################################################################"
+    select yn in "DHCP" "STATIC"; do
+        case $yn in
+            'DHCP' ) wifiIpType="dhcp"; break;;
+            'STATIC' ) wifiIpType="static"; break;;
+     esac
+    done
+    ###
+    ###
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
     #read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
