@@ -48,6 +48,22 @@ echo ""
 echo ""
 
 # Ask user for type or ARM processor
+
+echo "Select version of CentOS or Fedora"
+echo "####################################################################################"
+select yn in "CentOS 5" "CentOS 6" "CentOS 7" "Fedora 21"; do
+    case $yn in
+        'ARM v6' ) armVersion="6"; break;;
+        'ARM v7' ) armVersion="7"; break;;
+        'ARM v8' ) armVersion="8"; break;;
+ esac
+done
+
+###
+###
+###
+###
+
 echo "#########################################################################"
 read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
 echo "#########################################################################"
