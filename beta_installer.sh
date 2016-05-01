@@ -36,13 +36,13 @@ echo "#########################################################################"
 echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
 echo "      the corresponding version of the Arch ARM Linux image"
 echo ""
-echo "Select 'arm6' when using models like:  PI 1 MODEL A+"
+echo "Select 'ARM v6' when using models like:  PI 1 MODEL A+"
 echo "                                       PI 1 MODEL B+"
 echo "                                       PI ZERO"
 echo ""
-echo "Select 'arm7' when using models like:  PI 2 MODEL B"
+echo "Select 'ARM v7' when using models like:  PI 2 MODEL B"
 echo ""
-echo "Select 'arm8' when using models like:  PI 3 MODEL B"
+echo "Select 'ARM v8' when using models like:  PI 3 MODEL B"
 echo "#########################################################################"
 echo ""
 echo ""
@@ -51,7 +51,7 @@ echo ""
 
 echo "Select version of CentOS or Fedora"
 echo "####################################################################################"
-select yn in "CentOS 5" "CentOS 6" "CentOS 7" "Fedora 21"; do
+select yn in "ARM v6" "ARM v7" "ARM v8"; do
     case $yn in
         'ARM v6' ) armVersion="6"; break;;
         'ARM v7' ) armVersion="7"; break;;
