@@ -49,7 +49,7 @@ echo ""
 
 # Ask user for type or ARM processor
 
-echo "Select version of CentOS or Fedora"
+echo "Select version of the correct ARM version, see info above for more information;"
 echo "####################################################################################"
 select yn in "ARM v6" "ARM v7" "ARM v8"; do
     case $yn in
@@ -64,22 +64,22 @@ done
 ###
 ###
 
-echo "#########################################################################"
-read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
-echo "#########################################################################"
-if [ $armVersion = "arm6" ]; then
-  echo "Using ARM version: '$armVersion'"
-elif [ $armVersion = "arm7" ]; then
-  echo "Using ARM version: '$armVersion'"
-elif [ $armVersion = "arm8" ]; then
-  echo "Using ARM version: '$armVersion'"
-else
-   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arm#'"
-   exit 1
-   echo "#########################################################################"
-fi
-echo ""
-echo ""
+#echo "#########################################################################"
+#read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
+#echo "#########################################################################"
+#if [ $armVersion = "arm6" ]; then
+#  echo "Using ARM version: '$armVersion'"
+#elif [ $armVersion = "arm7" ]; then
+#  echo "Using ARM version: '$armVersion'"
+#elif [ $armVersion = "arm8" ]; then
+#  echo "Using ARM version: '$armVersion'"
+#else
+#   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arm#'"
+#   exit 1
+#   echo "#########################################################################"
+#fi
+#echo ""
+#echo ""
 
 # Collect other nessesarly variables
 echo "#########################################################################"
