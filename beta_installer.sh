@@ -85,10 +85,20 @@ done
 echo "#########################################################################"
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
 read -p 'Enter a hostname: ' hostName
-read -p 'Select network type: wifi/ethernet/both: ' networkType
+#read -p 'Select network type: wifi/ethernet/both: ' networkType
 echo "#########################################################################"
 echo ""
 echo ""
+
+echo "Select the network type you want to configure 'Wi-Fi', 'Ethernet' or 'Both';"
+echo "####################################################################################"
+select yn in "Wi-Fi" "Ethernet" "Wi-Fi & Ethernet"; do
+    case $yn in
+        'Wi-Fi' ) networkType="wifi"; break;;
+        'Ethernet' ) networkType="ethernet"; break;;
+        'Wi-Fi & Ethernet' ) networkType="both"; break;;
+ esac
+done
 
 # Check what type of networking is used
 echo "#########################################################################"
