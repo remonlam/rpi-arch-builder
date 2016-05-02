@@ -160,7 +160,6 @@ elif [ "$networkType" = "NONE" ]; then
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
-    # Replace DHCP to STATIC
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
     sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
     sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
@@ -233,9 +232,7 @@ echo "#########################################################################"
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
-     #{
      wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-     #} &> /dev/null
     echo "Download complete, expanding tar.gz to root"
      {
      bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
@@ -243,9 +240,7 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      } &> /dev/null
   else
     echo "Downloading Arch Linux ARM v'$armVersion'"
-     #{
      wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-     #} &> /dev/null
     echo "Download complete, expanding tar.gz to root"
      {
      bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
