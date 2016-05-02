@@ -16,14 +16,11 @@ if [ `id -u` = 0 ] ; then
         echo "#########################################################################"
         echo ""
         echo ""
-        # Wipe microSD card @ $sdCard
-        #echo "Wipe microSD card ('$sdCard')"
-        #dd if=/dev/zero of=/dev/$sdCard bs=1M count=1
   else
-echo "#########################################################################"
-echo "Not running as ROOT, exit script..."
-echo "#########################################################################"
-exit 1
+        echo "#########################################################################"
+        echo "Not running as ROOT, exit script..."
+        echo "#########################################################################"
+    exit 1
 fi
 
 
@@ -50,7 +47,6 @@ echo ""
 echo ""
 
 # Ask user for type or ARM processor
-
 echo "Select version of the correct ARM version, see info above for more information;"
 echo "####################################################################################"
 select yn in "ARM v6" "ARM v7" "ARM v8"; do
@@ -60,28 +56,6 @@ select yn in "ARM v6" "ARM v7" "ARM v8"; do
         'ARM v8' ) armVersion="8"; break;;
  esac
 done
-
-###
-###
-###
-###
-
-#echo "#########################################################################"
-#read -p 'What version of ARM?: arm6 / arm7 / arm8: ' armVersion
-#echo "#########################################################################"
-#if [ $armVersion = "arm6" ]; then
-#  echo "Using ARM version: '$armVersion'"
-#elif [ $armVersion = "arm7" ]; then
-#  echo "Using ARM version: '$armVersion'"
-#elif [ $armVersion = "arm8" ]; then
-#  echo "Using ARM version: '$armVersion'"
-#else
-#   echo "'$armVersion' is an invalid ARM version!!!!, should be something like 'arm#'"
-#   exit 1
-#   echo "#########################################################################"
-#fi
-#echo ""
-#echo ""
 
 # Collect other nessesarly variables
 echo "#########################################################################"
@@ -98,11 +72,9 @@ done
 
 
 read -p 'Enter a hostname: ' hostName
-#read -p 'Select network type: wifi/ethernet/both: ' networkType
 echo "#########################################################################"
 echo ""
 echo ""
-
 echo "Select the network type you want to configure 'Wi-Fi', 'Ethernet' or 'Both';"
 echo "####################################################################################"
 select yn in "Wi-Fi" "Ethernet" "Wi-Fi & Ethernet"; do
@@ -119,12 +91,8 @@ echo "Check what network type is used: '$networkType'"
 echo "#########################################################################"
 if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
-    #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
-    ###
-    ###
     echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
@@ -133,12 +101,8 @@ if [ $networkType = "wifi" ]; then
             'STATIC' ) wifiIpType="STATIC"; break;;
      esac
     done
-    ###
-    ###
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
-    #read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
-    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' ethernetIpType
     echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
@@ -149,10 +113,8 @@ elif [ $networkType = "ethernet" ]; then
     done
 elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
-    #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
     echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
@@ -161,7 +123,6 @@ elif [ $networkType = "both" ]; then
             'STATIC' ) wifiIpType="STATIC"; break;;
      esac
     done
-    #read -p 'Enter ethernet interface: example; eth0: ' ethernetInterface
 else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
    exit 1
