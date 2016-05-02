@@ -71,7 +71,7 @@ select yn in "Yes" "No"; do
 done
 echo "Removing all data from disk: '$sdCard'"
 echo "####################################################################################"
-sudo dd if=/dev/zero of=/dev/$sdCard bs=1024
+sudo dd if=/dev/zero of=/dev/$sdCard bs=512 count=1
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
