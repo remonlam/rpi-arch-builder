@@ -266,9 +266,9 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      } &> /dev/null
   else
     echo "Downloading Arch Linux ARM v'$armVersion'"
-     {
+     #{
      wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-     } &> /dev/null
+     #} &> /dev/null
     echo "Download complete, expanding tar.gz to root"
      {
      bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
@@ -343,6 +343,7 @@ elif [ $networkType = "ethernet" ]; then
     } &> /dev/null
 elif [ $networkType = "both" ]; then
   echo "Using Wi-Fi networking"
+      {
       # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
        wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
       # Extract tar.gz file to root/
