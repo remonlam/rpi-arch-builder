@@ -71,7 +71,11 @@ select yn in "Yes" "No"; do
 done
 echo "Removing all data from disk: '$sdCard'"
 echo "####################################################################################"
-sudo dd if=/dev/zero of=/dev/$sdCard bs=512 count=1
+# Remove each partition
+for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
+do
+   parted -s /dev/$sdCard rm ${partition}
+done
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
