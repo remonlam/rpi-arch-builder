@@ -86,6 +86,17 @@ done
 # Collect other nessesarly variables
 echo "#########################################################################"
 read -p 'Enter device name (SD-Card): like sdb: ' sdCard
+
+echo "Are you sure that device '$sdCard' can be used all data will be removed"
+echo "####################################################################################"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) echo; break;;
+        No ) exit;;
+    esac
+done
+
+
 read -p 'Enter a hostname: ' hostName
 #read -p 'Select network type: wifi/ethernet/both: ' networkType
 echo "#########################################################################"
