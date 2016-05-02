@@ -256,9 +256,9 @@ echo "#########################################################################"
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
   if [ $armVersion=6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
-     {
+     #{
      wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-     } &> /dev/null
+     #} &> /dev/null
     echo "Download complete, expanding tar.gz to root"
      {
      bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
