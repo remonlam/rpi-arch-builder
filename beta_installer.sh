@@ -9,8 +9,9 @@ if [ `id -u` = 0 ] ; then
         echo "#########################################################################"
         ### PRE-REQUIREMENTS
         # Check or install wget, tar and badtar
-        echo "Install 'wget, bsdtar & tar'"
+        {echo "Install 'wget, bsdtar & tar'"
         yum install -y wget bsdtar tar
+        } &> /dev/null
         echo "#########################################################################"
         echo ""
         echo ""
