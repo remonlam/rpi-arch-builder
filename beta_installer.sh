@@ -129,8 +129,8 @@ if [ $networkType = "wifi" ]; then
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
         case $yn in
-            'DHCP' ) wifiIpType="dhcp"; break;;
-            'STATIC' ) wifiIpType="static"; break;;
+            'DHCP' ) wifiIpType="DHCP"; break;;
+            'STATIC' ) wifiIpType="STATIC"; break;;
      esac
     done
     ###
