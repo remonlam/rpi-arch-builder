@@ -9,7 +9,8 @@ if [ `id -u` = 0 ] ; then
         echo "#########################################################################"
         ### PRE-REQUIREMENTS
         # Check or install wget, tar and badtar
-        {echo "Install 'wget, bsdtar & tar'"
+        {
+          echo "Install 'wget, bsdtar & tar'"
         yum install -y wget bsdtar tar
         } &> /dev/null
         echo "#########################################################################"
@@ -202,9 +203,11 @@ echo "#########################################################################"
 # Create parition layout
 echo "Create new parition layout on '$sdCard'"
 # NOTE: This will create a partition layout as beeing described in the README...
+{
 (echo o; echo n; echo p; echo 1; echo ; echo +100M; echo t; echo c; echo n; echo p; echo 2; echo ; echo ; echo w) | fdisk /dev/$sdCard
 # Sync disk
 sync
+} &> /dev/null
 echo "#########################################################################"
 echo ""
 echo ""
@@ -214,16 +217,20 @@ echo "#########################################################################"
 echo "Create temporary mount point for 'root' and 'boot'"
 echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
+{
 mkfs.vfat /dev/$sdCard$part1
 mkdir -p /temp/boot
 mount /dev/$sdCard$part1 /temp/boot
+} &> /dev/null
 echo ""
 
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
+{
 mkfs.ext4 /dev/$sdCard$part2
 mkdir -p /temp/root
 mount /dev/$sdCard$part2 /temp/root
+} &> /dev/null
 echo "#########################################################################"
 echo ""
 echo ""
