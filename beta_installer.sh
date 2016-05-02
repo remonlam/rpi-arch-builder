@@ -69,6 +69,13 @@ select yn in "Yes" "No"; do
         No ) exit;;
     esac
 done
+echo "Removing all data from disk: '$sdCard'"
+echo "####################################################################################"
+sudo dd if=/dev/zero of=/dev/$sdCard bs=1024
+echo "Device '$sdCard' has been removed successfully"
+echo "####################################################################################"
+echo ""
+echo ""
 
 
 read -p 'Enter a hostname: ' hostName
