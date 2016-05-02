@@ -138,13 +138,29 @@ if [ $networkType = "wifi" ]; then
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
     #read -p 'Enter ethernet interface: example; eth0 ' ethernetInterface
-    read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' ethernetIpType
+    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' ethernetIpType
+    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "####################################################################################"
+    select yn in "DHCP" "STATIC"; do
+        case $yn in
+            'DHCP' ) wifiIpType="DHCP"; break;;
+            'STATIC' ) wifiIpType="STATIC"; break;;
+     esac
+    done
 elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
     #read -p 'Enter wifi interface: example; wlan0 ' wifiInterface
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
+    #read -p 'Using DHCP or Fixed IP: DHCP/STATIC: ' wifiIpType
+    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "####################################################################################"
+    select yn in "DHCP" "STATIC"; do
+        case $yn in
+            'DHCP' ) wifiIpType="DHCP"; break;;
+            'STATIC' ) wifiIpType="STATIC"; break;;
+     esac
+    done
     #read -p 'Enter ethernet interface: example; eth0: ' ethernetInterface
 else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
