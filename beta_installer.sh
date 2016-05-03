@@ -71,6 +71,9 @@ select yn in "Yes" "No"; do
 done
 echo "Removing all data from disk: '$sdCard'"
 echo "####################################################################################"
+# Unmount partitions
+umount /dev/$sdCard1
+umount /dev/$sdCard2
 # Remove each partition
 for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
