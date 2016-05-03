@@ -72,8 +72,8 @@ done
 echo "Removing all data from disk: '$sdCard'"
 echo "####################################################################################"
 # Unmount partitions
-sudo umount /dev/$sdCard1
-sudo umount /dev/$sdCard2
+sudo umount /dev/'$sdCard'1
+sudo umount /dev/'$sdCard'2
 sleep 5
 # Remove each partition
 for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
