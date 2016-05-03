@@ -74,6 +74,7 @@ echo "##########################################################################
 # Unmount partitions
 umount /dev/$sdCard1
 umount /dev/$sdCard2
+sleep 3
 # Remove each partition
 for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
