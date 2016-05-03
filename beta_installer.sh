@@ -80,7 +80,7 @@ for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
    parted -s /dev/$sdCard rm ${partition}
 done
-dd if=/dev/zero of=/dev/$sdCard bs=101M count=1
+#dd if=/dev/zero of=/dev/$sdCard bs=101M count=1
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
