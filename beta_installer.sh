@@ -266,7 +266,6 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
 echo "Download and extract complete"
 
 #Move boot files to the first partition:
-rm -rf /temp/boot
 mv /temp/root/boot/* /temp/boot
 echo "#########################################################################"
 echo ""
