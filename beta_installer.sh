@@ -104,7 +104,7 @@ if [ $networkType = "wifi" ]; then
   echo "Using Wi-Fi networking"
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
         case $yn in
@@ -114,7 +114,7 @@ if [ $networkType = "wifi" ]; then
     done
 elif [ $networkType = "ethernet" ]; then
   echo "Using Ethernet networking"
-    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
         case $yn in
@@ -126,7 +126,7 @@ elif [ $networkType = "both" ]; then
  echo "Using both Wi-Fi and Ethernet networking"
     read -p 'Enter wifi name (Accesspoint): ' wifiAP
     read -p 'Enter wifi password: ' wifiKey
-    echo "Select what type of IP address needs to be configured, 'DHCP' or 'STATIC' IP;"
+    echo "Select what type of IP address needs to be configured; 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
         case $yn in
