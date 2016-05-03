@@ -118,8 +118,8 @@ elif [ $networkType = "ethernet" ]; then
     echo "####################################################################################"
     select yn in "DHCP" "STATIC"; do
         case $yn in
-            'DHCP' ) wifiIpType="DHCP"; break;;
-            'STATIC' ) wifiIpType="STATIC"; break;;
+            'DHCP' ) ethernetIpType="DHCP"; break;;
+            'STATIC' ) ethernetIpType="STATIC"; break;;
      esac
     done
 elif [ $networkType = "both" ]; then
