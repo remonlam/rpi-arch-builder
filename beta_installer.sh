@@ -76,6 +76,7 @@ for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
    parted -s /dev/$sdCard rm ${partition}
 done
+dd if=/dev/null of=/dev/$sdCard bs=101M count=1
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
@@ -261,6 +262,7 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
 echo "Download and extract complete"
 
 #Move boot files to the first partition:
+rm -rf /temp/boot
 mv /temp/root/boot/* /temp/boot
 echo "#########################################################################"
 echo ""
