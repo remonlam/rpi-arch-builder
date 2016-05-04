@@ -221,6 +221,7 @@ echo "Create temporary mount point for 'root' and 'boot'"
 echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 #{
+sleep 5
 mkfs.vfat /dev/$sdCard$part1
 #mkfs -t vfat -F32 /dev/$sdCard$part1
 mkdir -p /temp/boot
