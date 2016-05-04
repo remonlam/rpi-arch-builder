@@ -72,15 +72,19 @@ done
 echo "Removing all data from disk: '$sdCard'"
 echo "####################################################################################"
 # Unmount partitions
-#sudo umount /dev/$sdCard$part1
-#sudo umount /dev/$sdCard$part2
+{
+sudo umount /dev/$sdCard$part1
+sudo umount /dev/$sdCard$part2
+} &> /dev/null
 #sleep 5
 # Remove each partition
 for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
    parted -s /dev/$sdCard rm ${partition}
 done
+{
 dd if=/dev/zero of=/dev/$sdCard bs=105M count=1
+} &> /dev/null
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
@@ -220,13 +224,13 @@ echo "#########################################################################"
 echo "Create temporary mount point for 'root' and 'boot'"
 echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
-#{
+{
 sleep 5
 mkfs.vfat /dev/$sdCard$part1
 #mkfs -t vfat -F32 /dev/$sdCard$part1
 mkdir -p /temp/boot
 mount /dev/$sdCard$part1 /temp/boot
-#} &> /dev/null
+} &> /dev/null
 echo ""
 
 #Create and mount the ext4 filesystem:
