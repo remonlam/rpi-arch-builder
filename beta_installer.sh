@@ -80,7 +80,7 @@ for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
 do
    parted -s /dev/$sdCard rm ${partition}
 done
-dd if=/dev/zero of=/dev/$sdCard bs=101M count=1
+dd if=/dev/zero of=/dev/$sdCard bs=105M count=1
 echo "Device '$sdCard' has been removed successfully"
 echo "####################################################################################"
 echo ""
@@ -221,7 +221,8 @@ echo "Create temporary mount point for 'root' and 'boot'"
 echo "#########################################################################"
 echo "Create and mount the FAT filesystem on '$sdCard$part1'"
 {
-mkfs.vfat /dev/$sdCard$part1
+#mkfs.vfat /dev/$sdCard$part1
+mkfs -t vfat -F32 /dev/$sdCard$part1
 mkdir -p /temp/boot
 mount /dev/$sdCard$part1 /temp/boot
 } &> /dev/null
@@ -230,7 +231,8 @@ echo ""
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 {
-mkfs.ext4 /dev/$sdCard$part2
+#mkfs.ext4 /dev/$sdCard$part2
+mkfs -t ext4 /dev/$sdCard$part2
 mkdir -p /temp/root
 mount /dev/$sdCard$part2 /temp/root
 } &> /dev/null
