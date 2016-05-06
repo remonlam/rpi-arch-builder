@@ -236,7 +236,6 @@ echo ""
 #Create and mount the ext4 filesystem:
 echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
 {
-#mkfs.ext4 /dev/$sdCard$part2
 mkfs -t ext4 /dev/$sdCard$part2
 mkdir -p /temp/root
 mount /dev/$sdCard$part2 /temp/root
