@@ -1,20 +1,20 @@
-#Create an Arch Linux ARM (Raspberry Pi Zero) microSD Card image.
-![Raspberry Pi Zero and Arch Linux ARM](/images/rpi_arm_banner.png)
+#Create an Arch Linux ARM (Raspberry Pi - All versions) microSD Card image.
+![Raspberry Pi and Arch Linux ARM](/images/rpi_arm_banner.png)
 
 For some reason the Arch Linux community stopped providing an pre-build image for the Raspberry Pi.
-There are instructions how to build an Arch Linux ARM on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image.
+However they provide instructions how to build an Arch Linux ARM "image" on the projects website @ (http://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2) however it's still a lot of work to build the image, and no automate options are available like wifi configuration etc.
 
 To make things simple I've created a little script to automate some of the steps.
 
 ## What does this script do?
 Here's what it does?
-  - It will partition the microSD card (one 100MB boot partition and a root partition that consumes the rest of the space).
-  - It will download the correct version of the Arch Linux ARM image (v6 or v7)
+  - It will partition the microSD card (one 100MB boot partition and a root partition that consumes the rest of the space) NOTE: it will wipe/remove all data on the SD card!!.
+  - It will download the correct version of the Arch Linux ARM image (v6, v7 and when available the v8 version)
   - It extract the image to the microSD card
-  - It sets the GPU memory from 64MB to 16MB (so we have more memory available our apps)
+  - It sets the GPU memory from 64MB to 16MB (so we have more memory available our apps, assume you don't need a desktop)
   - It fixes the rotation issue with the Raspberry Pi 7" screen, check https://github.com/remonlam/rpi-touch-display-fix
   - Installs/extracts "libnl" and "wpa" packages
-  - Copy wlan0 configuration files and create a netctl service for wlan0
+  - Copy eth0/wlan0 configuration files and create a netctl service for eth0/wlan0
   - Enable root access trough SSH
   - Sets the hostname
 
