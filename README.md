@@ -37,6 +37,10 @@ This script will ask you a couple of things;
 In order to use this scrip you need to download the shell script and make it executable.
 ...```wget https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/arch_image_builder.sh```
 ...```chmod 755 arch_image_builder.sh```
+Or using GIT
+Browse to the directory that you want to use for GIT;
+Execute: ...```git clone https://github.com/containerstack/rbi-arch-builder.git```
+Browse to ../rpi-arch-builder/ and use the script like ./install.sh
 
 ## Can't get it to work?
 Well the script have some dependencies that needs to be in-place in order get it working.
