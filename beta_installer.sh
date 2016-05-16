@@ -253,7 +253,7 @@ echo "#########################################################################"
 echo "Download and extract Arch Linux ARM image"
 echo "#########################################################################"
 echo "Download Arch Linux ARM v'$armVersion' and expand to root"
-  if [ $armVersion=6 ]; then
+  if [ $armVersion = 6 ]; then
     echo "Downloading Arch Linux ARM v'$armVersion'"
      wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
     echo "Download complete, expanding tar.gz to root"
