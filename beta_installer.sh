@@ -175,7 +175,7 @@ if [ "$networkType" = "both" ]; then
   echo "#########################################################################"
   echo "Setup IP settings for network profile: BOTH"
   echo "#########################################################################"
-              if [ ("$wifiIpType" = "STATIC") -a ("$ethernetIpType" = "STATIC") ]; then
+              if [ ("$wifiIpType" = "STATIC") -o ("$ethernetIpType" = "STATIC") ]; then
                   echo "Setup Fixed IP settings for: BOTH-WIFI"
                   echo "#########################################################################"
                         if [ "$wifiIpType" = "STATIC" ]; then
