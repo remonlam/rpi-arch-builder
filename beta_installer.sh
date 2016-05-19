@@ -115,7 +115,7 @@ if [ $networkType = "wifi" ]; then
     read -p 'Enter wifi password: ' wifiKey
     echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
     echo "####################################################################################"
-    select yn in "DHCP" "STATIC"; do
+      select yn in "DHCP" "STATIC"; do
         case $yn in
             'DHCP' ) wifiIpType="DHCP"; break;;
             'STATIC' ) wifiIpType="STATIC"; break;;
@@ -133,16 +133,27 @@ if [ $networkType = "wifi" ]; then
             done
         elif [ $networkType = "both" ]; then
          echo "Using both Wi-Fi and Ethernet networking"
+         echo "Wi-Fi configuration:"
             read -p 'Enter wifi name (Accesspoint): ' wifiAP
             read -p 'Enter wifi password: ' wifiKey
             echo "Select what type of IP address needs to be configured; 'DHCP' or 'STATIC' IP;"
             echo "####################################################################################"
             select yn in "DHCP" "STATIC"; do
-                case $yn in
-                    'DHCP' ) wifiIpType="DHCP"; break;; # <--- need to change wifiIpType to something else
-                    'STATIC' ) wifiIpType="STATIC"; break;; # <--- need to change wifiIpType to something else
-             esac
+              case $yn in
+                'DHCP' ) wifiIpType="DHCP"; break;; # <--- need to change wifiIpType to something else
+                'STATIC' ) wifiIpType="STATIC"; break;; # <--- need to change wifiIpType to something else
+              esac
             done
+            echo "Ethernet (wired) configuration:"
+            echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
+            echo "####################################################################################"
+            select yn in "DHCP" "STATIC"; do
+                 case $yn in
+                   'DHCP' ) ethernetIpType="DHCP"; break;;
+                   'STATIC' ) ethernetIpType="STATIC"; break;;
+                 esac
+            done
+
 else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
    exit 1
