@@ -170,14 +170,14 @@ echo "Check if DHCP or STATIC IP needs to be configured"
 echo "NOTE: This let's you choose between Wi-Fi, Ethernet or both of them"
 echo "#########################################################################"
 if [ "$wifiIpType" = "STATIC" ]; then
-  echo "Setup Fixed IP settings for: '$networkType'"
+  echo "Setup Fixed IP settings for: WiFi-Static"
     read -p 'Enter IP Address: ' networkWifiIP
     read -p 'Enter IP Subnet, example: 24: ' networkWifiSubnet
     read -p 'Enter Gateway: ' networkWifiGateway
     read -p 'Enter DNS 1: ' networkWifiDns1
     read -p 'Enter DNS 2: ' networkWifiDns2
   elif [ "$ethernetIpType" = "STATIC" ]; then
-    echo "Setup Fixed IP settings for: '$networkType'"
+    echo "Setup Fixed IP settings for: Ethernet-Static"
       read -p 'Enter IP Address: ' networkEthernetIP
       read -p 'Enter IP Subnet, example: 24: ' networkEthernetSubnet
       read -p 'Enter Gateway: ' networkEthernetGateway
