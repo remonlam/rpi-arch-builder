@@ -187,6 +187,7 @@ if [ "$networkType" = "both" ]; then
               sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
               sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
               sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+              continue
             #echo "Setup Fixed IP settings for: Ethernet"
             #echo "#########################################################################"
             #  read -p 'Enter IP Address: ' networkEthernetIP
