@@ -261,6 +261,23 @@ echo "Download Arch Linux ARM v'$armVersion' and expand to root"
      bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
      sync
      } &> /dev/null
+   elif [ $armVersion = 7 ]; then
+     echo "Downloading Arch Linux ARM v7"
+      wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+     echo "Download complete, expanding tar.gz to root"
+      {
+      bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
+      sync
+      } &> /dev/null
+   elif [ $armVersion = 8 ]; then
+     echo "Downloading Arch Linux ARM v8, but the image is still v7 :-("
+      wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+     echo "Download complete, expanding tar.gz to root"
+      {
+      bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
+      sync
+      } &> /dev/null
+
   else
     echo "Downloading Arch Linux ARM v'$armVersion'"
      wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
