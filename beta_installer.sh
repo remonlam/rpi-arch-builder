@@ -170,6 +170,9 @@ echo "Check if DHCP or STATIC IP needs to be configured"
 echo "NOTE: This let's you choose between Wi-Fi, Ethernet or both of them"
 echo "#########################################################################"
 if [ "$networkType" = "both" ]; then
+  echo ""
+  echo ""
+  echo "#########################################################################"
   echo "Setup IP settings for network profile: BOTH"
   echo "#########################################################################"
               if [ "$wifiIpType" = "STATIC" ]; then
