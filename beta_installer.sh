@@ -121,28 +121,28 @@ if [ $networkType = "wifi" ]; then
             'STATIC' ) wifiIpType="STATIC"; break;;
      esac
     done
-elif [ $networkType = "ethernet" ]; then
-  echo "Using Ethernet networking"
-    echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
-    echo "####################################################################################"
-    select yn in "DHCP" "STATIC"; do
-        case $yn in
-            'DHCP' ) ethernetIpType="DHCP"; break;;
-            'STATIC' ) ethernetIpType="STATIC"; break;;
-     esac
-    done
-elif [ $networkType = "both" ]; then
- echo "Using both Wi-Fi and Ethernet networking"
-    read -p 'Enter wifi name (Accesspoint): ' wifiAP
-    read -p 'Enter wifi password: ' wifiKey
-    echo "Select what type of IP address needs to be configured; 'DHCP' or 'STATIC' IP;"
-    echo "####################################################################################"
-    select yn in "DHCP" "STATIC"; do
-        case $yn in
-            'DHCP' ) wifiIpType="DHCP"; break;; # <--- need to change wifiIpType to something else
-            'STATIC' ) wifiIpType="STATIC"; break;; # <--- need to change wifiIpType to something else
-     esac
-    done
+        elif [ $networkType = "ethernet" ]; then
+          echo "Using Ethernet networking"
+            echo "Select what type of IP address needs to be configured: 'DHCP' or 'STATIC' IP;"
+            echo "####################################################################################"
+            select yn in "DHCP" "STATIC"; do
+                case $yn in
+                    'DHCP' ) ethernetIpType="DHCP"; break;;
+                    'STATIC' ) ethernetIpType="STATIC"; break;;
+             esac
+            done
+        elif [ $networkType = "both" ]; then
+         echo "Using both Wi-Fi and Ethernet networking"
+            read -p 'Enter wifi name (Accesspoint): ' wifiAP
+            read -p 'Enter wifi password: ' wifiKey
+            echo "Select what type of IP address needs to be configured; 'DHCP' or 'STATIC' IP;"
+            echo "####################################################################################"
+            select yn in "DHCP" "STATIC"; do
+                case $yn in
+                    'DHCP' ) wifiIpType="DHCP"; break;; # <--- need to change wifiIpType to something else
+                    'STATIC' ) wifiIpType="STATIC"; break;; # <--- need to change wifiIpType to something else
+             esac
+            done
 else
    echo "'$networkType' = Invalid variable: ....Go home your drunk...."
    exit 1
@@ -391,35 +391,35 @@ if [ "$wifiIpType" = "STATIC" ]; then
     sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
   echo "Prepping done..."
     elif [ "$wifiIpType" = "DHCP" ]; then
-      echo "Prepping WiFi config files for DHCP IP configuration"
-        sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-        sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
-      echo "Prepping done..."
+        echo "Prepping WiFi config files for DHCP IP configuration"
+          sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+          sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+        echo "Prepping done..."
     elif [ "$ethernetIpType" = "DHCP" ]; then
-      echo "Prepping Ethernet config files for DHCP IP configuration"
-      echo "Prepping done..."
+        echo "Prepping Ethernet config files for DHCP IP configuration"
+        echo "Prepping done..."
     elif [ "$ethernetIpType" = "STATIC" ]; then
-      echo "Prepping Ethernet config files for STATIC IP configuration"
-        sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
-        sed -i "/IP=static/ a Address=('$networkEthernetIP/$networkEthernetSubnet')" /temp/root/etc/netctl/eth0
-        sed -i "/Address=/ a Gateway=('$networkEthernetGateway')" /temp/root/etc/netctl/eth0
-        sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
-      echo "Prepping done..."
+        echo "Prepping Ethernet config files for STATIC IP configuration"
+          sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
+          sed -i "/IP=static/ a Address=('$networkEthernetIP/$networkEthernetSubnet')" /temp/root/etc/netctl/eth0
+          sed -i "/Address=/ a Gateway=('$networkEthernetGateway')" /temp/root/etc/netctl/eth0
+          sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
+        echo "Prepping done..."
     elif [ "$networkType" = "both" ]; then
-      echo "Prepping WiFi & Ethernet config files for STATIC IP configuration"
-      # Wi-Fi
-        sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
-        sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
-        sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
-        sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
-        sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-        sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
-      # Ethernet
-        sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
-        sed -i "/IP=static/ a Address=('$networkEthernetIP/$networkEthernetSubnet')" /temp/root/etc/netctl/eth0
-        sed -i "/Address=/ a Gateway=('$networkEthernetGateway')" /temp/root/etc/netctl/eth0
-        sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
-      echo "Prepping done..."
+        echo "Prepping WiFi & Ethernet config files for STATIC IP configuration"
+        # Wi-Fi
+          sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+          sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+          sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+          sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+          sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+          sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+        # Ethernet
+          sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
+          sed -i "/IP=static/ a Address=('$networkEthernetIP/$networkEthernetSubnet')" /temp/root/etc/netctl/eth0
+          sed -i "/Address=/ a Gateway=('$networkEthernetGateway')" /temp/root/etc/netctl/eth0
+          sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
+        echo "Prepping done..."
 else
     echo "'Something went wrong but I have no idea why.... have fun debugging ;-)"
     exit 1
