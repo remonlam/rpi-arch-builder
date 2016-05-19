@@ -190,8 +190,20 @@ if [ "$networkType" = "both" ]; then
     read -p 'Enter Gateway: ' networkEthernetGateway
     read -p 'Enter DNS 1: ' networkEthernetDns1
     read -p 'Enter DNS 2: ' networkEthernetDns2
-    else
-      echo "You're selected DHCP so no IP settings needs to be configured"
+      elif [ "$wifiIpType" = "DHCP" ]; then
+        echo "Setup Fixed IP settings for: WiFi-DHCP"
+      elif [ "$ethernetIpType" = "STATIC" ]; then
+        echo "Setup Fixed IP settings for: Ethernet-Static"
+        echo "#########################################################################"
+          read -p 'Enter IP Address: ' networkEthernetIP
+          read -p 'Enter IP Subnet, example: 24: ' networkEthernetSubnet
+          read -p 'Enter Gateway: ' networkEthernetGateway
+          read -p 'Enter DNS 1: ' networkEthernetDns1
+          read -p 'Enter DNS 2: ' networkEthernetDns2
+      elif [ "$ethernetIpType" = "DHCP" ]; then
+        echo "Setup Fixed IP settings for: Ethernet-DHCP"
+        else
+          echo "You're selected DHCP so no IP settings needs to be configured"
     fi
   elif [ "$wifiIpType" = "STATIC" ]; then
     echo "Setup Fixed IP settings for: WiFi-Static"
