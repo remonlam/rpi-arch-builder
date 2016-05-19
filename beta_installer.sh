@@ -175,19 +175,23 @@ if [ "$networkType" = "both" ]; then
   echo "#########################################################################"
   echo "Setup IP settings for network profile: BOTH"
   echo "#########################################################################"
-              if [ "$wifiIpType" = "STATIC" ]; then
-              echo "Setup Fixed IP settings for: BOTH-WIFI-STATIC"
-              echo "#########################################################################"
-              read -p 'Enter IP Address: ' networkWifiIP
-              read -p 'Enter IP Subnet, example: 24: ' networkWifiSubnet
-              read -p 'Enter Gateway: ' networkWifiGateway
-              read -p 'Enter DNS 1: ' networkWifiDns1
-              read -p 'Enter DNS 2: ' networkWifiDns2
-              sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
-              sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
-              sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
-              sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
-              continue
+              if [ ("$wifiIpType" = "STATIC") -a ("$ethernetIpType" = "STATIC") ]; then
+                  echo "Setup Fixed IP settings for: BOTH-WIFI"
+                  echo "#########################################################################"
+                        if [ "$wifiIpType" = "STATIC" ]; then
+                          echo "Setup Fixed IP settings for: BOTH-WIFI_ETHERNET-STATIC"
+                          echo "#########################################################################"
+                          read -p 'Enter IP Address: ' networkWifiIP
+                          read -p 'Enter IP Subnet, example: 24: ' networkWifiSubnet
+                          read -p 'Enter Gateway: ' networkWifiGateway
+                          read -p 'Enter DNS 1: ' networkWifiDns1
+                          read -p 'Enter DNS 2: ' networkWifiDns2
+                          sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
+                          sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
+                          sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
+                          sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+              else "something went wrong selecting the BOTH network profile"
+              fi
             #echo "Setup Fixed IP settings for: Ethernet"
             #echo "#########################################################################"
             #  read -p 'Enter IP Address: ' networkEthernetIP
