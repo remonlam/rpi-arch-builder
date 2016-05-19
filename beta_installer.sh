@@ -173,6 +173,7 @@ if [ "$networkType" = "both" ]; then
   echo "DEBUG: show network type: '$networkType'"
   echo "Setup Fixed IP settings for: Wi-Fi"
   echo "#########################################################################"
+    if [ "$wifiIpType" = "STATIC" ]; then
     read -p 'Enter IP Address: ' networkWifiIP
     read -p 'Enter IP Subnet, example: 24: ' networkWifiSubnet
     read -p 'Enter Gateway: ' networkWifiGateway
@@ -189,6 +190,8 @@ if [ "$networkType" = "both" ]; then
     read -p 'Enter Gateway: ' networkEthernetGateway
     read -p 'Enter DNS 1: ' networkEthernetDns1
     read -p 'Enter DNS 2: ' networkEthernetDns2
+    else
+      echo "You're selected DHCP so no IP settings needs to be configured"
   elif [ "$wifiIpType" = "STATIC" ]; then
     echo "Setup Fixed IP settings for: WiFi-Static"
       read -p 'Enter IP Address: ' networkWifiIP
