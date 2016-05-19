@@ -192,6 +192,7 @@ if [ "$networkType" = "both" ]; then
     read -p 'Enter DNS 2: ' networkEthernetDns2
     else
       echo "You're selected DHCP so no IP settings needs to be configured"
+    fi
   elif [ "$wifiIpType" = "STATIC" ]; then
     echo "Setup Fixed IP settings for: WiFi-Static"
       read -p 'Enter IP Address: ' networkWifiIP
