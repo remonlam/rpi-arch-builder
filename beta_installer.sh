@@ -205,6 +205,7 @@ if [ "$networkType" = "both" ]; then
                     read -p 'Enter Gateway: ' networkEthernetGateway
                     read -p 'Enter DNS 1: ' networkEthernetDns1
                     read -p 'Enter DNS 2: ' networkEthernetDns2
+                    continue
             #    elif [ "$ethernetIpType" = "DHCP" ]; then
             #      echo "Setup Fixed IP settings for: Ethernet-DHCP"
             #      else
