@@ -406,6 +406,8 @@ function networkProfileSelection {
       echo "show varIpType:" $varIpType
         if [ "$varIpType" = "WIFI-STATIC" ]; then
           ipWifiStatic
+          elif [ "$varIpType" = "WIFI-DHCP" ]; then
+            ipWifiDynamic
         fi
     elif [ "$varNetworkType" = "ETH" ]; then
         echo "Setup Fixed IP settings for: ##"
