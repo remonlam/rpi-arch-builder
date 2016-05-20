@@ -51,28 +51,28 @@ function formatSdCard {
 
   echo "Are you sure that device '$sdCard' can be used, all data will be removed!!"
   echo "####################################################################################"
-  select yn in "Yes" "No"; do
-      case $yn in
-          Yes ) echo; break;;
-          No ) exit;;
-      esac
-  done
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) echo; break;;
+            No ) exit;;
+        esac
+    done
   echo "Removing all data from disk: '$sdCard'"
   echo "####################################################################################"
 
 # Unmount partitions
   {
-  sudo umount /dev/$sdCard$part1
-  sudo umount /dev/$sdCard$part2
+    sudo umount /dev/$sdCard$part1
+    sudo umount /dev/$sdCard$part2
   } &> /dev/null
 
 # Remove each partition
   for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
-  do
-     parted -s /dev/$sdCard rm ${partition}
-  done
+    do
+       parted -s /dev/$sdCard rm ${partition}
+    done
   {
-  dd if=/dev/zero of=/dev/$sdCard bs=105M count=1
+    dd if=/dev/zero of=/dev/$sdCard bs=105M count=1
   } &> /dev/null
   echo "Device '$sdCard' has been successfully partitioned"
   echo "####################################################################################"
@@ -86,9 +86,9 @@ function formatSdCard {
   echo "Create new parition layout on '$sdCard'"
   # NOTE: This will create a partition layout as beeing described in the README...
   {
-  (echo o; echo n; echo p; echo 1; echo ; echo +100M; echo t; echo c; echo n; echo p; echo 2; echo ; echo ; echo w) | fdisk /dev/$sdCard
+    (echo o; echo n; echo p; echo 1; echo ; echo +100M; echo t; echo c; echo n; echo p; echo 2; echo ; echo ; echo w) | fdisk /dev/$sdCard
   # Sync disk
-  sync
+    sync
   } &> /dev/null
   echo "#########################################################################"
   echo ""
@@ -100,18 +100,18 @@ function formatSdCard {
   echo "#########################################################################"
   echo "Create and mount the FAT filesystem on '$sdCard$part1'"
   {
-  sleep 5
-  mkfs.vfat /dev/$sdCard$part1
-  mkdir -p /temp/boot
-  mount /dev/$sdCard$part1 /temp/boot
+    sleep 5
+    mkfs.vfat /dev/$sdCard$part1
+    mkdir -p /temp/boot
+    mount /dev/$sdCard$part1 /temp/boot
   } &> /dev/null
   echo ""
 
   echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
   {
-  mkfs -t ext4 /dev/$sdCard$part2
-  mkdir -p /temp/root
-  mount /dev/$sdCard$part2 /temp/root
+    mkfs -t ext4 /dev/$sdCard$part2
+    mkdir -p /temp/root
+    mount /dev/$sdCard$part2 /temp/root
   } &> /dev/null
   echo "#########################################################################"
   echo ""
@@ -322,6 +322,21 @@ function dualIpType {
 
 
 #########################################################################################
+### NOTE: This function will write netctl configuration files when using WiFi.
+###
+### NOTE: This function is used only for Wifi
+function ipWifiDynamic {
+  echo "Setup Dynamic IP settings for: $varIpType"
+  echo "#########################################################################"
+  echo "Prepping WiFi netctl config files"
+    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
+    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
+}
+#########################################################################################
+
+
+
+#########################################################################################
 ### NOTE: This function will ask the user for Static IP configuration and write -
 ###       it back as a variable.
 ###
@@ -392,21 +407,6 @@ function ipEthernetStatic {
     sed -i "/IP=static/ a Address=('$ethernetIp/$ethernetMask')" /temp/root/etc/netctl/eth0
     sed -i "/Address=/ a Gateway=('$ethernetGateway')" /temp/root/etc/netctl/eth0
     sed -i "/Gateway=/ a DNS=('$ethernetDns1' '$ethernetDns2')" /temp/root/etc/netctl/eth0
-}
-#########################################################################################
-
-
-
-#########################################################################################
-### NOTE: This function will write netctl configuration files when using WiFi.
-###
-### NOTE: This function is used only for Wifi
-function ipWifiDynamic {
-  echo "Setup Dynamic IP settings for: $varIpType"
-  echo "#########################################################################"
-  echo "Prepping WiFi netctl config files"
-    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
 }
 #########################################################################################
 
