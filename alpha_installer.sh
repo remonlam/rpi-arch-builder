@@ -407,30 +407,30 @@ function networkProfileSelection {
         if [ "$varIpType" = "WIFI-STATIC" ]; then
           ipWifiStatic
         fi
-  elif [ "$varNetworkType" = "ETH" ]; then
-      echo "Setup Fixed IP settings for: ##"
-      echo "#########################################################################"
-        singleIpType
-        echo "show varIpType:" $varIpType
-          if [ "$varIpType" = "ETH-STATIC" ]; then
-            ipEthernetStatic
-          fi
+    elif [ "$varNetworkType" = "ETH" ]; then
+        echo "Setup Fixed IP settings for: ##"
+        echo "#########################################################################"
+          singleIpType
+          echo "show varIpType:" $varIpType
+            if [ "$varIpType" = "ETH-STATIC" ]; then
+              ipEthernetStatic
+            fi
     elif [ "$varNetworkType" = "DUAL" ]; then
         echo "Setup Fixed IP settings for: ##"
         echo "#########################################################################"
           accpCredentials
           dualIpType
-          if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
-            echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
-            ipWifiStatic
-          elif [ "$varIpType" = "DUAL-DHCP_STATIC" ]; then
-            echo "DEBUG: setup config for 'DUAL-DHCP_STATIC'"
-            ipEthernetStatic
-          elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
-            echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
-            ipWifiStatic
-            ipEthernetStatic
-          fi
+            if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
+              echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
+              ipWifiStatic
+              elif [ "$varIpType" = "DUAL-DHCP_STATIC" ]; then
+                echo "DEBUG: setup config for 'DUAL-DHCP_STATIC'"
+                ipEthernetStatic
+              elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
+                echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
+                ipWifiStatic
+                ipEthernetStatic
+            fi
   fi
 }
 #########################################################################################
