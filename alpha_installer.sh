@@ -308,7 +308,7 @@ function ipWifiStatic {
     read -p 'Enter IP Subnet, example: 24: ' wifiMask
     read -p 'Enter Gateway: ' wifiGateway
     read -p 'Enter DNS 1: ' wifiDns1
-    read -p 'Enter DNS 2: ' wifiDns1
+    read -p 'Enter DNS 2: ' wifiDns2
 
 # Downloading netctl template files and wpa packages
   {
@@ -348,7 +348,7 @@ function ipEthernetStatic {
     read -p 'Enter IP Subnet, example: 24: ' ethernetMask
     read -p 'Enter Gateway: ' ethernetGateway
     read -p 'Enter DNS 1: ' ethernetDns1
-    read -p 'Enter DNS 2: ' ethernetDns1
+    read -p 'Enter DNS 2: ' ethernetDns2
 
 # Downloading netctl template files
   {
@@ -364,8 +364,8 @@ function ipEthernetStatic {
 # Prepping Ethernet configuration files
   echo "Prepping Ethernet netctl config files"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
-    sed -i "/IP=static/ a Address=('$networkEthernetIP/$networkEthernetSubnet')" /temp/root/etc/netctl/eth0
-    sed -i "/Address=/ a Gateway=('$networkEthernetGateway')" /temp/root/etc/netctl/eth0
+    sed -i "/IP=static/ a Address=('$ethernetIp/$ethernetMask')" /temp/root/etc/netctl/eth0
+    sed -i "/Address=/ a Gateway=('$ethernetGateway')" /temp/root/etc/netctl/eth0
     sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
 }
 #########################################################################################
