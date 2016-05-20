@@ -412,7 +412,6 @@ function ipWifiDynamic {
 
 
 
-
 #########################################################################################
 ### NOTE: This function will ask the user for a network and IP type and write it back -
 ###       as a variable.
@@ -449,14 +448,15 @@ function networkProfileSelection {
           dualIpType
             if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
               echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
-              ipWifiStatic
+                ipWifiStatic
               elif [ "$varIpType" = "DUAL-DHCP_STATIC" ]; then
                 echo "DEBUG: setup config for 'DUAL-DHCP_STATIC'"
-                ipEthernetStatic
-              elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
-                echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
-                ipWifiStatic
-                ipEthernetStatic
+                  ipWifiDynamic
+                  ipEthernetStatic
+                elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
+                  echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
+                    ipWifiStatic
+                    ipEthernetStatic
             fi
   fi
 }
