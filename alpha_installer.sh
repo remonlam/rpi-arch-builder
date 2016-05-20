@@ -328,9 +328,9 @@ function ipWifiStatic {
 # Prepping Ethernet configuration files
   echo "Prepping WiFi netctl config files"
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/wlan0
-    sed -i "/IP=static/ a Address=('$networkWifiIP/$networkWifiSubnet')" /temp/root/etc/netctl/wlan0
-    sed -i "/Address=/ a Gateway=('$networkWifiGateway')" /temp/root/etc/netctl/wlan0
-    sed -i "/Gateway=/ a DNS=('$networkWifiDns1' '$networkWifiDns2')" /temp/root/etc/netctl/wlan0
+    sed -i "/IP=static/ a Address=('$wifiIp/$wifiMask')" /temp/root/etc/netctl/wlan0
+    sed -i "/Address=/ a Gateway=('$wifiGateway')" /temp/root/etc/netctl/wlan0
+    sed -i "/Gateway=/ a DNS=('$wifiDns1' '$wifiDns2')" /temp/root/etc/netctl/wlan0
 }
 #########################################################################################
 
@@ -366,7 +366,7 @@ function ipEthernetStatic {
     sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
     sed -i "/IP=static/ a Address=('$ethernetIp/$ethernetMask')" /temp/root/etc/netctl/eth0
     sed -i "/Address=/ a Gateway=('$ethernetGateway')" /temp/root/etc/netctl/eth0
-    sed -i "/Gateway=/ a DNS=('$networkEthernetDns1' '$networkEthernetDns2')" /temp/root/etc/netctl/eth0
+    sed -i "/Gateway=/ a DNS=('$ethernetDns1' '$ethernetDns2')" /temp/root/etc/netctl/eth0
 }
 #########################################################################################
 
