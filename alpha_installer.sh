@@ -327,7 +327,7 @@ function dualIpType {
 ###
 ### NOTE: This function is used only for WiFi
 function ipWifiStatic {
-  echo "Setup Fixed IP settings for: $varIpType"
+  echo "Setup Fixed IP settings for WiFi: $varIpType"
   echo "#########################################################################"
     read -p 'Enter IP Address: ' wifiIp
     read -p 'Enter IP Subnet, example: 24: ' wifiMask
@@ -367,7 +367,7 @@ function ipWifiStatic {
 ###
 ### NOTE: This function is used only for Ethernet
 function ipEthernetStatic {
-  echo "Setup Fixed IP settings for: $varIpType"
+  echo "Setup Fixed IP settings for Ethernet: $varIpType"
   echo "#########################################################################"
     read -p 'Enter IP Address: ' ethernetIp
     read -p 'Enter IP Subnet, example: 24: ' ethernetMask
