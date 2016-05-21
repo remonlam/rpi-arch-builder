@@ -525,7 +525,6 @@ echo "Remove datasources, waiting until mount points are removed"
 sleep 5
 rm -rf /temp/
 echo "All files in /temp/ are removed!"
-exit 0
 echo "#########################################################################"
 }
 #########################################################################################
@@ -586,5 +585,6 @@ function printConfigSummary {
 formatSdCard
 selectArmVersion
 networkProfileSelection
+systemPreConfiguration
 cleanupFunction
 printConfigSummary
