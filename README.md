@@ -39,14 +39,14 @@ In order to use this scrip you need to download the shell script and make it exe
 Or using GIT
 Browse to the directory that you want to use for GIT;
 Execute: ...```git clone https://github.com/containerstack/rbi-arch-builder.git```
-Browse to ../rpi-arch-builder/ and use the script like ./install.sh
+Browse to ../rpi-arch-builder/ and use the script like; ./install.sh
 
 ## Can't get it to work?
 Well the script have some dependencies that needs to be in-place in order get it working.
 To make things a bit more simple, I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
 
 ## Why this script?
-This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi Zero (or any other Pi with ARM version 6).
+This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi (any Pi version that contains an ARM version 6, 7 or 8).
 
 Why this script, because it's kinda easy to write the image to a microSD card your self!
 That's true but with the Pi Zero that's not as easy as with the other Pi models, because the Pi Zero only have on micro USB connector that's in use for WiFi it's not that easy to put a keyboard to the Pi Zero.
