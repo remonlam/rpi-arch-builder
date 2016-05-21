@@ -179,7 +179,7 @@ function selectArmVersion {
     if [ $armVersion = 6 ]; then
       echo "Downloading Arch Linux ARM v6"
        wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-      echo "Download complete, expanding tar.gz to root"
+      echo "Download complete, expanding image to root"
        {
        bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
        sync
@@ -187,7 +187,7 @@ function selectArmVersion {
        elif [ $armVersion = 7 ]; then
          echo "Downloading Arch Linux ARM v7"
           wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding tar.gz to root"
+         echo "Download complete, expanding image to root"
           {
           bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
           sync
@@ -195,7 +195,7 @@ function selectArmVersion {
        elif [ $armVersion = 8 ]; then
          echo "Downloading Arch Linux ARM v8, but the image is still v7 :-("
           wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding tar.gz to root"
+         echo "Download complete, expanding image to root"
           {
           bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
           sync
@@ -440,8 +440,8 @@ function networkProfileSelection {
   if [ "$varNetworkType" = "WIFI" ]; then
     echo "Setup Fixed IP settings for: ##"
     echo "#########################################################################"
-      accpCredentials
       singleIpType
+      accpCredentials
       echo "show varIpType:" $varIpType
         if [ "$varIpType" = "WIFI-STATIC" ]; then
           ipWifiStatic
@@ -459,8 +459,8 @@ function networkProfileSelection {
     elif [ "$varNetworkType" = "DUAL" ]; then
         echo "Setup Fixed IP settings for: ##"
         echo "#########################################################################"
-          accpCredentials
           dualIpType
+          accpCredentials
             if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
               echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
                 ipWifiStatic
