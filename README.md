@@ -11,7 +11,7 @@ Here's what it does?
   - It will partition the microSD card (one 100MB boot partition and a root partition that consumes the rest of the space) NOTE: it will wipe/remove all data on the SD card!!.
   - It will download the correct version of the Arch Linux ARM image (v6, v7 and when available the v8 version)
   - It extract the image to the microSD card
-  - It sets the GPU memory from 64MB to 16MB (so we have more memory available our apps, assume you don't need a desktop)
+  - It sets the GPU memory from 64MB to 16MB (so you have more memory available your apps, assume you don't need a desktop)
   - It fixes the rotation issue with the Raspberry Pi 7" screen, check https://github.com/remonlam/rpi-touch-display-fix
   - Installs/extracts "libnl" and "wpa" packages
   - Copy eth0/wlan0 configuration files and create a netctl service for eth0/wlan0
@@ -19,7 +19,6 @@ Here's what it does?
   - Sets the hostname
 
 What it won't do!
-  - Clear the microSD card, this can be done with help of the tool Disk
   - Assume the correct drive name for the microSD card, that's up to you!!!
 
 ##SD Card Creation
