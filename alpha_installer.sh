@@ -61,10 +61,10 @@ function formatSdCard {
   echo "####################################################################################"
 
 # Unmount partitions
-  {
+  #{
     sudo umount /dev/$sdCard$part1
     sudo umount /dev/$sdCard$part2
-  } &> /dev/null
+  #} &> /dev/null
 
 # Remove each partition
   for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
