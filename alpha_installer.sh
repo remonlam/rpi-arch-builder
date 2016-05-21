@@ -494,10 +494,9 @@ function networkProfileSelection {
                   accpCredentials
                   ipEthernetStatic
               elif [ "$varIpType" = "DUAL-DHCP_DHCP" ]; then
-                echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
-                  ipWifiStatic
+                echo "DEBUG: setup config for 'DUAL-DHCP_DHCP'"
+                  ipWifiDynamic
                   accpCredentials
-                  ipEthernetStatic
             fi
   fi
 }
