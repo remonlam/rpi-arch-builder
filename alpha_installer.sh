@@ -226,8 +226,6 @@ function systemPreConfiguration {
   sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 # Enable root logins for sshd
   sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
-# Change hostname
-  sed -i 's/alarmpi/'$varHostName'/' /temp/root/etc/hostname
 # Download post configuration script and make file executable
   {
   wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
@@ -252,6 +250,9 @@ function hostName {
   echo "Enter a hostname only, do no include a domain name!;"
   echo "####################################################################################"
     read -p 'Enter a hostname: ' varHostName
+
+  # Change hostname
+    sed -i 's/alarmpi/'$varHostName'/' /temp/root/etc/hostname
 }
 #########################################################################################
 
@@ -487,11 +488,16 @@ function networkProfileSelection {
                   ipWifiDynamic
                   accpCredentials
                   ipEthernetStatic
-                elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
-                  echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
-                    ipWifiStatic
-                    accpCredentials
-                    ipEthernetStatic
+              elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
+                echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
+                  ipWifiStatic
+                  accpCredentials
+                  ipEthernetStatic
+              elif [ "$varIpType" = "DUAL-DHCP_DHCP" ]; then
+                echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
+                  ipWifiStatic
+                  accpCredentials
+                  ipEthernetStatic
             fi
   fi
 }
