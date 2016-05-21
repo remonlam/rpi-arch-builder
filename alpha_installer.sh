@@ -60,11 +60,15 @@ function formatSdCard {
   echo "Removing all data from disk: '$sdCard'"
   echo "####################################################################################"
 
+# Set fixed variables
+  part1=1
+  part2=2
+
 # Unmount partitions
-  #{
+  {
     sudo umount /dev/$sdCard$part1
     sudo umount /dev/$sdCard$part2
-  #} &> /dev/null
+  } &> /dev/null
 
 # Remove each partition
   for partition in $(parted -s /dev/$sdCard print|awk '/^ / {print $1}')
@@ -140,10 +144,6 @@ function checkForImage {
 ### NOTE: This function will select the correct Arch Linux ARM version, download and -
 ###       extract the image to the SD card.
 function selectArmVersion {
-# Set fixed variables
-  part1=1
-  part2=2
-
 # Ask user for system specific variables
   echo "#########################################################################"
   echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
