@@ -511,12 +511,19 @@ echo "#########################################################################"
 #########################################################################################
 
 
+
 #########################################################################################
 ### NOTE: This function will print all configuration information at the end of this script.
 ###
 function printConfigSummary {
-#IN_DEV
+  echo "#########################################################################"
+  echo "Display configuration information;"
+  echo "#########################################################################"
+    echo "IP: " $wifiIp $ethernetIp
+    echo "Hostname: " $varHostName
+
 }
+#########################################################################################
 
 
 
@@ -556,7 +563,8 @@ function printConfigSummary {
 ### RUNTIME                                                                           ###
 #########################################################################################
 
-#formatSdCard
-#selectArmVersion
+formatSdCard
+selectArmVersion
 networkProfileSelection
-#cleanupFunction
+cleanupFunction
+printConfigSummary
