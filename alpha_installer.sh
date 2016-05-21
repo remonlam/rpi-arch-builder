@@ -359,11 +359,6 @@ function ipWifiDynamic {
     cp -rf /temp/netctl@wlan0.service /temp/root/etc/systemd/system/
     ln -s '/temp/root/etc/systemd/system/netctl@wlan0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@wlan0.service'
   } &> /dev/null
-
-# Prepping Ethernet configuration files
-    echo "Prepping WiFi netctl config files"
-    sed -i "s/ESSID='SSID-NAME'/ESSID='$wifiAP'/" /temp/root/etc/netctl/wlan0
-    sed -i "s/Key='SSID-KEY'/Key='$wifiKey'/" /temp/root/etc/netctl/wlan0
 }
 #########################################################################################
 
