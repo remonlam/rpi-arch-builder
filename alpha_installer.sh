@@ -122,6 +122,21 @@ function formatSdCard {
 
 
 #########################################################################################
+### NOTE: This function will check if the Arch Linux image is present on the disk
+function checkForImage {
+  FILE="ArchLinuxARM-rpi-latest.tar.gz"
+  if [ -f "$FILE" ];
+    then
+       echo "File $FILE exist."
+    else
+       echo "File $FILE does not exist" >&2
+  fi
+}
+#########################################################################################
+
+
+
+#########################################################################################
 ### NOTE: This function will select the correct Arch Linux ARM version, download and -
 ###       extract the image to the SD card.
 function selectArmVersion {
