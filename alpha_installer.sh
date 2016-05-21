@@ -458,12 +458,13 @@ function networkProfileSelection {
     echo "Setup Fixed IP settings for: ##"
     echo "#########################################################################"
       singleIpType
-      accpCredentials
       echo "show varIpType:" $varIpType
         if [ "$varIpType" = "WIFI-STATIC" ]; then
           ipWifiStatic
+          accpCredentials
           elif [ "$varIpType" = "WIFI-DHCP" ]; then
             ipWifiDynamic
+            accpCredentials
         fi
     elif [ "$varNetworkType" = "ETH" ]; then
         echo "Setup Fixed IP settings for: ##"
@@ -477,17 +478,19 @@ function networkProfileSelection {
         echo "Setup Fixed IP settings for: ##"
         echo "#########################################################################"
           dualIpType
-          accpCredentials
             if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
               echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
                 ipWifiStatic
+                accpCredentials
               elif [ "$varIpType" = "DUAL-DHCP_STATIC" ]; then
                 echo "DEBUG: setup config for 'DUAL-DHCP_STATIC'"
                   ipWifiDynamic
+                  accpCredentials
                   ipEthernetStatic
                 elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
                   echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
                     ipWifiStatic
+                    accpCredentials
                     ipEthernetStatic
             fi
   fi
