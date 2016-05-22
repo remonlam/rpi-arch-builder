@@ -305,7 +305,7 @@ sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/
 sed -i 's/alarmpi/'$hostName'/' /temp/root/etc/hostname
 # Download post configuration script and make file executable
 {
-wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/systemd_config/configure-system.sh
+wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/sources/configure-system.sh
 chmod 755 /temp/configure-system.sh
 } &> /dev/null
 # Copy "configure-system.sh" script to "root"
