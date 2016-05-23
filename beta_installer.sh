@@ -436,7 +436,7 @@ function ipEthernetStatic {
     sed -i "/Address=/ a Gateway=('$ethernetGateway')" /temp/root/etc/netctl/eth0
     sed -i "/Gateway=/ a DNS=('$ethernetDns1' '$ethernetDns2')" /temp/root/etc/netctl/eth0
 
- # Remove systemd-networkd.service
+ # Remove "systemd-networkd.service"
     rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
     rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-networkd.service
 }
