@@ -550,38 +550,6 @@ function printConfigSummary {
 
 
 
-
-#if [ $varNetworkType = "WIFI" ]; then
-#  echo "Using WiFi networking"
-#    accpCredentials
-#    singleIpType
-#      elif [ $varNetworkType = "ETH" ]; then
-#        echo "Using Ethernet networking"
-#          singleIpType
-#      elif [ $varNetworkType = "DUAL" ]; then
-#        echo "Using Dual (WiFi/Eth) networking"
-#          accpCredentials
-#          dualIpType
-#      else
-#        echo "Error; something went wrong selecting the correct 'networkType'"
-#fi
-#}
-
-
-#function ipConfiguration {
-#if [ $varNetworkType = "WIFI" ]; then
-#  echo "Using WiFi networking"
-#            elif [ $varNetworkType = "ETH" ]; then
-#        echo "Using Ethernet networking"
-#          elif [ $varNetworkType = "DUAL" ]; then
-#        echo "Using Dual (WiFi/Eth) networking"
-#          else
-#        echo "Error; something went wrong selecting the correct 'networkType' for the IP configuration"
-#fi
-#}
-
-
-
 #########################################################################################
 ### RUNTIME                                                                           ###
 #########################################################################################
