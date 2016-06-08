@@ -17,3 +17,11 @@ fi
 
 echo "GPG verification output"
 gpg --verify $1.asc $1
+
+
+docker stop prod-haproxy
+docker stop prod-web0
+docker stop prod-web1
+docker stop prod-web2
+docker stop prod-mysql
+docker stop 127c98240f12

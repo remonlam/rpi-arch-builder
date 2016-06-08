@@ -2,6 +2,9 @@
 
 function checkImage {
 
+function checkImageHash {
+
+}
 
 function test {
   ifconfig
