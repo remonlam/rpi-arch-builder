@@ -37,6 +37,14 @@ fi
 ###################################
 
 #########################################################################################
+### NOTE: This function will remove the SystemctlNetwork and SystemctlDNS services -
+###       to prevent DHCP from kicking in during boot and make DNS to point to the -
+###       configured addresses.
+function disableSystemctlServices {
+
+}
+
+#########################################################################################
 ### NOTE: This function will format the disk, create new partitions / filesystem -
 ###       Mount it to /temp/boot & /temp/root.
 function formatSdCard {
@@ -554,6 +562,7 @@ function printConfigSummary {
 ### RUNTIME                                                                           ###
 #########################################################################################
 
+# Run functions
 formatSdCard
 selectArmVersion
 networkProfileSelection
