@@ -41,7 +41,11 @@ fi
 ###       to prevent DHCP from kicking in during boot and make DNS to point to the -
 ###       configured addresses.
 function disableSystemctlServices {
+# Remove SystemctlNetwork
+rm /temp/root/etc/systemctl/../../../
 
+# Remove Systemctl-DNS
+rm /temp/root/etc/systemctl/../../../
 }
 
 #########################################################################################
@@ -385,6 +389,7 @@ function ipWifiStatic {
     read -p 'Enter Gateway: ' wifiGateway
     read -p 'Enter DNS 1: ' wifiDns1
     read -p 'Enter DNS 2: ' wifiDns2
+    read -P 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files and wpa packages
   {
@@ -425,6 +430,7 @@ function ipEthernetStatic {
     read -p 'Enter Gateway: ' ethernetGateway
     read -p 'Enter DNS 1: ' ethernetDns1
     read -p 'Enter DNS 2: ' ethernetDns2
+    read -P 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files
   {
