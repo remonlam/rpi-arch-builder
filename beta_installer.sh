@@ -544,7 +544,7 @@ if [ "$varNetworkType" = "WIFI" ]; then
       echo "#########################################################################"
         echo -e "search $dnsSearch\nnameserver $ethernetDns1\nnameserver $ethernetDns2" > /etc/resolv.conf
           fi
-fi
+#fi
 }
 #########################################################################################
 
