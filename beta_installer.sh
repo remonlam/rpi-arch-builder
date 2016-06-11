@@ -605,7 +605,7 @@ function printConfigSummary {
 formatSdCard
 selectArmVersion
 networkProfileSelection
-disableSystemServices
+#disableSystemServices
 systemPreConfiguration
-cleanupFunction
+#cleanupFunction
 printConfigSummary
