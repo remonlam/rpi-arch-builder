@@ -4,7 +4,8 @@ if [ -f "$FILE" ];
 then
    echo "File $FILE exist."
    varCheckForLocalSource="true"
-   varTest="md5 -q test.txt"
+   md5 -q test.txt
+   echo"HEIRNIET"
 else
    echo "File $FILE does not exist" >&2
    varCheckForLocalSource="false"
@@ -12,6 +13,8 @@ fi
 echo $varCheckForLocalSource
 echo $FILE
 echo $1
+
+
 # To Do;
 # - Add check based on md5 file hash
 # - make a if file exists than do md5 check
