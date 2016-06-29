@@ -607,5 +607,5 @@ selectArmVersion
 networkProfileSelection
 #disableSystemServices
 systemPreConfiguration
-#cleanupFunction
+cleanupFunction
 printConfigSummary

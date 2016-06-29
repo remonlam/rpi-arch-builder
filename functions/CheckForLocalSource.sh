@@ -19,7 +19,10 @@ echo $FILE
 echo $1
 
 
-if [[ $(md5sum "$FILE") = 5d40f31729c992b5a0e67490689fe8ff* ]]
+if [[ $(md5sum "test.txt") = d41d8cd98f00b204e9800998ecf8427e* ]]
+md5sum -c "d41d8cd98f00b204e9800998ecf8427e" "test.txt"
+
+if [[ $(md5sum "$test") = d41d8cd98f00b204e9800998ecf8427e* ]]
 
 
 
