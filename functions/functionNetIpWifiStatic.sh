@@ -13,7 +13,7 @@ function functionNetIpWifiStatic {
     read -p 'Enter Gateway: ' wifiGateway
     read -p 'Enter DNS 1: ' wifiDns1
     read -p 'Enter DNS 2: ' wifiDns2
-    read -P 'Enter DNS Search domain: ' dnsSearch
+    read -p 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files and wpa packages
   {
