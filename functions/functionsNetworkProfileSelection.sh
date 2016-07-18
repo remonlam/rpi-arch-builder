@@ -18,15 +18,7 @@
 . ./functions/functionNetDualIpType.sh
 . ./functions/functionNetIpWifiStatic.sh
 . ./functions/functionNetIpWifiDynamic.sh
-. ./functions/functionNet
-. ./functions/functionNet
-. ./functions/functionNet
-. ./functions/functionNet
-. ./functions/functionNet
-. ./functions/functionNet
 . ./functions/functionNetIpEthernetStatic
-
-
 
 
 #########################################################################################
