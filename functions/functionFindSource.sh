@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #FILE=../functions/iso.txt
-read -p "Enter file name: " FILE
 
-. ./functionLocalVsDownload.sh
+
+#. ./functionLocalVsDownload.sh
 
 # Create function call disabled for now.
 function functionFindSource {
-
+read -p "Enter file name: " FILE
 if [ -f "$FILE" ];
 then
    echo "File $FILE exist."
