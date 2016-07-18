@@ -11,7 +11,7 @@
 . ./functions/functionCleanup.sh
 . ./functions/functionDisableSystemctlServices.sh
 . ./functions/functionDisableSystemdServices.sh
-. ./functions/functionFindSource.sh
+#. ./functions/functionFindSource.sh
 . ./functions/functionFormatDisk.sh
 . ./functions/functionNetAccpCredentials.sh
 . ./functions/functionNetDualIpType.sh
