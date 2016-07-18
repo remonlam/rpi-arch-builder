@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Create function call disabled for now.
-#function CheckForLocalSource {
-###
 function functionFindSource {
 if [ -f "$FILE" ];
 then
