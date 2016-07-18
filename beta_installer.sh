@@ -35,117 +35,12 @@ rm /temp/root/etc/systemctl/../../../
 
 
 #########################################################################################
-### NOTE: This function will check if the Arch Linux image is present on the disk
-function checkForImage {
-  FILE="ArchLinuxARM-rpi-latest.tar.gz"
-  if [ -f "$FILE" ];
-    then
-       echo "File $FILE exist."
-    else
-       echo "File $FILE does not exist" >&2
-  fi
-}
-#########################################################################################
 test
 
 
 #########################################################################################
-### NOTE: This function will select the correct Arch Linux ARM version, download and -
-###       extract the image to the SD card.
-function selectArmVersion {
-# Ask user for system specific variables
-  echo "#########################################################################"
-  echo "NOTE: Select the correct version of ARM is nessesarly for downloading"
-  echo "      the corresponding version of the Arch ARM Linux image"
-  echo ""
-  echo "Select 'ARM v6' when using models like:  PI 1 MODEL A+"
-  echo "                                         PI 1 MODEL B+"
-  echo "                                         PI ZERO"
-  echo ""
-  echo "Select 'ARM v7' when using models like:  PI 2 MODEL B"
-  echo ""
-  echo "Select 'ARM v8' when using models like:  PI 3 MODEL B"
-  echo "#########################################################################"
-  echo ""
-  echo ""
-
-# Ask user for type or ARM processor
-  echo "Select version of the correct ARM version, see info above for more information;"
-  echo "####################################################################################"
-  select yn in "ARM v6" "ARM v7" "ARM v8"; do
-      case $yn in
-          'ARM v6' ) armVersion="6"; break;;
-          'ARM v7' ) armVersion="7"; break;;
-          'ARM v8' ) armVersion="8"; break;;
-   esac
-  done
-
-# Download Arch Linux ARM image, check what version ARM v6 or v7
-  echo "#########################################################################"
-  echo "Download and extract Arch Linux ARM image"
-  echo "#########################################################################"
-  echo "Download Arch Linux ARM v'$armVersion' and expand to root"
-    if [ $armVersion = 6 ]; then
-      echo "Downloading Arch Linux ARM v6"
-       wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-      echo "Download complete, expanding image to root"
-       {
-       bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
-       sync
-       } &> /dev/null
-       elif [ $armVersion = 7 ]; then
-         echo "Downloading Arch Linux ARM v7"
-          wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding image to root"
-          {
-          bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
-          sync
-          } &> /dev/null
-       elif [ $armVersion = 8 ]; then
-         echo "Downloading Arch Linux ARM v8, but the image is still v7 :-("
-          wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding image to root"
-          {
-          bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
-          sync
-          } &> /dev/null
-      else
-        echo "'Something went wrong with the arm version selecton... script will exit..."
-        exit 1
-    fi
-  echo "Download and extract complete"
-
-#Move boot files to the first partition:
-  mv /temp/root/boot/* /temp/boot
-  echo "#########################################################################"
-  echo ""
-  echo ""
-}
-#########################################################################################
 
 
-function systemPreConfiguration {
-# System configuration
-  echo "#########################################################################"
-  echo "System pre-configuration"
-  echo "#########################################################################"
-# Change rotation of Pi Screen' >> /temp/boot/config.txt
-  echo lcd_rotate=2 >> /temp/boot/config.txt
-# Change GPU memory from 64MB to 16MB
-  sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
-# Enable root logins for sshd
-  sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
-# Download post configuration script and make file executable
-  {
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/sources/configure-system.sh
-  chmod 755 /temp/configure-system.sh
-  } &> /dev/null
-# Copy "configure-system.sh" script to "root"
-  mv /temp/configure-system.sh /temp/root
-  echo "#########################################################################"
-  echo ""
-  echo ""
-}
 
 
 ###################################
@@ -414,35 +309,7 @@ function networkProfileSelection {
 
 
 
-#########################################################################################
-### NOTE: This function will remove the SystemctlNetwork and SystemctlDNS services -
-###       to prevent DHCP from kicking in during boot and make DNS to point to the -
-###       configured addresses.
-function disableSystemdServices {
-# Remove systemd-networkd & systemd-resolved
-rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-resolved.service
-rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-resolved.socket
 
-# Remove old resolv.conf
-rm -rf /etc/resolv.conf
-
-# Create new resolv.conf file
-if [ "$varNetworkType" = "WIFI" ]; then
-  echo "Setup Fixed IP settings for: ##"
-  echo "#########################################################################"
-      echo -e "search $dnsSearch\nnameserver $wifiDns1\nnameserver $wifiDns2" > /etc/resolv.conf
-  elif [ "$varNetworkType" = "ETH" ]; then
-      echo "Setup Fixed IP settings for: ##"
-      echo "#########################################################################"
-              echo -e "search $dnsSearch\nnameserver $ethernetDns1\nnameserver $ethernetDns2" > /etc/resolv.conf
-  elif [ "$varNetworkType" = "DUAL" ]; then
-      echo "Setup Fixed IP settings for: ##"
-      echo "#########################################################################"
-        echo -e "search $dnsSearch\nnameserver $ethernetDns1\nnameserver $ethernetDns2" > /etc/resolv.conf
-          fi
-#fi
-}
 #########################################################################################
 
 
@@ -451,46 +318,11 @@ if [ "$varNetworkType" = "WIFI" ]; then
 ## Script functions
 ###################################
 
-#########################################################################################
-### NOTE: This function unmount disk and cleanup /temp/.
-###
-function cleanupFunction {
-### UNMOUNT DISK & CLEANUP
-echo "#########################################################################"
-echo "Unmount disks and cleanup /temp directory"
-echo "#########################################################################"
-# Do a final sync, and wait 5 seconds before unmouting
-sync
-echo "Wait 5 seconds before unmouting 'boot' and 'root' mount points"
-sleep 5
-
-#Unmount the boot and root partitions:
-umount /temp/boot /temp/root
-echo "Unmount completed, it's safe to remove the microSD card!"
-
-# Removing data sources
-echo "Remove datasources, waiting until mount points are removed"
-sleep 5
-rm -rf /temp/
-echo "All files in /temp/ are removed!"
-echo "#########################################################################"
-}
-#########################################################################################
 
 
 
-#########################################################################################
-### NOTE: This function will print all configuration information at the end of this script.
-###
-function printConfigSummary {
-  echo "#########################################################################"
-  echo "Display configuration information;"
-  echo "#########################################################################"
-    echo "IP: " $wifiIp $ethernetIp
-    echo "Hostname: " $varHostName
 
-}
-#########################################################################################
+
 
 
 
@@ -500,11 +332,12 @@ function printConfigSummary {
 
 # Run functions
 masterFunction
+functionSelectArmVersion
 functionRootCheck
-formatDisk
+functionFormatDisk
 selectArmVersion
 networkProfileSelection
-#disableSystemServices
+#functionDisableSystemdServices
 systemPreConfiguration
-cleanupFunction
+functionCleanup
 printConfigSummary
