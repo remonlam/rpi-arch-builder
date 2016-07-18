@@ -7,20 +7,23 @@
 . ./functions/masterVariables.sh
 
 # Import other functions
-
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-. ./functions/
-
-
-. ./functions/setRootPassword.sh
-. ./functions/formatDisk.sh
+. ./functions/functionCheckForImage.sh
+. ./functions/functionCleanup.sh
+. ./functions/functionDisableSystemctlServices.sh
+. ./functions/functionDisableSystemdServices.sh
 . ./functions/functionFindSource.sh
+. ./functions/functionFormatDisk.sh
+. ./functions/functionNetAccpCredentials.sh
+. ./functions/functionNetDualIpType.sh
+. ./functions/functionNetHostName.sh
+. ./functions/functionNetIpEthernetStatic.sh
+. ./functions/functionNetIpWifiDynamic
+. ./functions/functionNetIpWifiStatic.sh
+. ./functions/functionNetNetworkType.sh
+. ./functions/functionNetSingleIpType.sh
+. ./functions/functionRootCheck.sh
+. ./functions/functionRootPassword.sh
+. ./functions/functionSelectArmVersion.sh
 . ./functions/functionShowConfig.sh
+. ./functions/functionSystemPreConfiguration.sh
+. ./functions/functionsNetworkProfileSelection.sh
