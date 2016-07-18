@@ -13,6 +13,7 @@ read -p "Enter file name: " FILE
      #md5 -q $FILE
      echo "File found..."
      echo $varCheckForLocalSource
+     functionLocalVsDownload
   else
      echo "File $FILE does not exist" >&2
      varCheckForLocalSource="FALSE"
