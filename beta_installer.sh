@@ -1,46 +1,8 @@
 #!/bin/bash
 
-#########################################################################################
-### RUNTIME CHECK                                                                     ###
-#########################################################################################
-
-# Check if script is running as root, if not then exit
-
-
-
-
-#########################################################################################
-###   FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS     ###
-#########################################################################################
-
-###################################
-## System functions
-###################################
-
-#########################################################################################
-### NOTE: This function will remove the SystemctlNetwork and SystemctlDNS services -
-###       to prevent DHCP from kicking in during boot and make DNS to point to the -
-###       configured addresses.
-function disableSystemctlServices {
-# Remove SystemctlNetwork
-rm /temp/root/etc/systemctl/../../../
-
-# Remove Systemctl-DNS
-rm /temp/root/etc/systemctl/../../../
-}
-
-
-#########################################################################################
-
-
-
-#########################################################################################
-test
-
-
-#########################################################################################
-
-
+## Import Variables & Functions from external sources
+. ./functions/masterVariables.sh
+. ./functions/masterFunctions.sh
 
 
 ###################################
@@ -307,37 +269,19 @@ function networkProfileSelection {
 }
 #########################################################################################
 
-
-
-
-#########################################################################################
-
-
-
-###################################
-## Script functions
-###################################
-
-
-
-
-
-
-
-
-
 #########################################################################################
 ### RUNTIME                                                                           ###
 #########################################################################################
 
 # Run functions
-masterFunction
-functionSelectArmVersion
 functionRootCheck
 functionFormatDisk
-selectArmVersion
+functionFindSource
+functionSelectArmVersion
+#functionDisableSystemctlServices #need to chec if this is the right place to execute this function
+
 networkProfileSelection
-#functionDisableSystemdServices
-systemPreConfiguration
+
+functionSystemPreConfiguration
 functionCleanup
-printConfigSummary
+functionShowConfig
