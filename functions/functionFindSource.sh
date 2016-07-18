@@ -18,6 +18,7 @@ read -p "Enter file name: " FILE
      varCheckForLocalSource="FALSE"
      echo "File not found..."
      echo $varCheckForLocalSource
+     . ./functions/functionLocalVsDownload.sh
      functionLocalVsDownload
   fi
 
