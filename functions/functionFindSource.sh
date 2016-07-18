@@ -20,7 +20,6 @@ else
    varCheckForLocalSource="FALSE"
    echo "File not found..."
    echo $varCheckForLocalSource
-   exit 0
 fi
 
 

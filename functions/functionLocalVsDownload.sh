@@ -9,6 +9,6 @@ if [ "$varCheckForLocalSource" = "TRUE" ]; then
     elif [ "$varCheckForLocalSource" = "FALSE" ]; then
         echo "No local ISO source found, download is required :-( "
         echo "#########################################################################"
-        exit 0
+        functionSelectArmVersion
   fi
 }
