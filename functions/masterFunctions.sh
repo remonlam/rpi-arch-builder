@@ -2,6 +2,7 @@
 
 ## Master function script
 ## this script will call all functions in this directory
+## Network functions will be loaded in "../functions/functionsNetworkProfileSelection"
 
 ## This is just a master test script it wont be used for something :-)
 . ./functions/masterVariables.sh
@@ -13,14 +14,6 @@
 . ./functions/functionDisableSystemdServices.sh
 #. ./functions/functionFindSource.sh
 . ./functions/functionFormatDisk.sh
-#. ./functions/functionNetAccpCredentials.sh
-#. ./functions/functionNetDualIpType.sh
-#. ./functions/functionNetHostName.sh
-#. ./functions/functionNetIpEthernetStatic.sh
-#. ./functions/functionNetIpWifiDynamic
-#. ./functions/functionNetIpWifiStatic.sh
-#. ./functions/functionNetNetworkType.sh
-#. ./functions/functionNetSingleIpType.sh
 . ./functions/functionRootCheck.sh
 . ./functions/functionRootPassword.sh
 . ./functions/functionSelectArmVersion.sh
