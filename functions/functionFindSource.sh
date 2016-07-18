@@ -21,7 +21,6 @@ if [[ $(md5sum "test.txt") = d41d8cd98f00b204e9800998ecf8427e* ]]
 md5sum -c "d41d8cd98f00b204e9800998ecf8427e" "test.txt"
 
 if [[ $(md5sum "$test") = d41d8cd98f00b204e9800998ecf8427e* ]]
-
 }
 
 
