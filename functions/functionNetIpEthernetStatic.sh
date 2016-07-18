@@ -13,7 +13,7 @@ function functionNetIpEthernetStatic {
     read -p 'Enter Gateway: ' ethernetGateway
     read -p 'Enter DNS 1: ' ethernetDns1
     read -p 'Enter DNS 2: ' ethernetDns2
-    read -P 'Enter DNS Search domain: ' dnsSearch
+    read -p 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files
   {
