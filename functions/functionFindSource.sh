@@ -1,26 +1,25 @@
 #!/bin/bash
 
-#FILE=../functions/iso.txt
 
-
-#. ./functionLocalVsDownload.sh
 
 # Create function call disabled for now.
 function functionFindSource {
+
 read -p "Enter file name: " FILE
-if [ -f "$FILE" ];
-then
-   echo "File $FILE exist."
-   varCheckForLocalSource="TRUE"
-   md5 -q $FILE
-   echo "File found..."
-   echo $varCheckForLocalSource
-else
-   echo "File $FILE does not exist" >&2
-   varCheckForLocalSource="FALSE"
-   echo "File not found..."
-   echo $varCheckForLocalSource
-fi
+  if [ -f "$FILE" ];
+  then
+     echo "File $FILE exist."
+     varCheckForLocalSource="TRUE"
+     md5 -q $FILE
+     echo "File found..."
+     echo $varCheckForLocalSource
+  else
+     echo "File $FILE does not exist" >&2
+     varCheckForLocalSource="FALSE"
+     echo "File not found..."
+     echo $varCheckForLocalSource
+     functionLocalVsDownload
+  fi
 
 
 
@@ -34,7 +33,3 @@ fi
 
 #if [[ $(md5sum "$test") = d41d8cd98f00b204e9800998ecf8427e* ]]
 }
-
-
-functionFindSource
-functionLocalVsDownload
