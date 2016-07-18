@@ -4,7 +4,7 @@
 
 # Create function call disabled for now.
 function functionFindSource {
-
+. ./functions/functionLocalVsDownload.sh
 read -p "Enter file name: " FILE
   if [ -f "$FILE" ];
   then
