@@ -34,45 +34,45 @@ function functionsNetworkProfileSelection {
   if [ "$varNetworkType" = "WIFI" ]; then
     echo "Setup Fixed IP settings for: ##"
     echo "#########################################################################"
-      functionSingleIpType
+      functionNetSingleIpType
       echo "show varIpType:" $varIpType
         if [ "$varIpType" = "WIFI-STATIC" ]; then
-          functionIpWifiStatic
-          functionAccpCredentials
+          functionNetIpWifiStatic
+          functionNetAccpCredentials
           elif [ "$varIpType" = "WIFI-DHCP" ]; then
-            functionIpWifiDynamic
-            functionAccpCredentials
+            functionNetIpWifiDynamic
+            functionNetAccpCredentials
         fi
     elif [ "$varNetworkType" = "ETH" ]; then
         echo "Setup Fixed IP settings for: ##"
         echo "#########################################################################"
-          functionSingleIpType
+          functionNetSingleIpType
           echo "show varIpType:" $varIpType
             if [ "$varIpType" = "ETH-STATIC" ]; then
-              functionIpEthernetStatic
+              functionNetIpEthernetStatic
             fi
     elif [ "$varNetworkType" = "DUAL" ]; then
         echo "Setup Fixed IP settings for: ##"
         echo "#########################################################################"
-          functionDualIpType
+          functionNetDualIpType
             if [ "$varIpType" = "DUAL-STATIC_DHCP" ]; then
               echo "DEBUG: setup config for 'DUAL-STATIC_DHCP'"
-                functionIpWifiStatic
-                functionAccpCredentials
+                functionNetIpWifiStatic
+                functionNetAccpCredentials
               elif [ "$varIpType" = "DUAL-DHCP_STATIC" ]; then
                 echo "DEBUG: setup config for 'DUAL-DHCP_STATIC'"
-                  functionIpWifiDynamic
-                  functionAccpCredentials
-                  functionIpEthernetStatic
+                  functionNetIpWifiDynamic
+                  functionNetAccpCredentials
+                  functionNetIpEthernetStatic
               elif [ "$varIpType" = "DUAL-STATIC_STATIC" ]; then
                 echo "DEBUG: setup config for 'DUAL-STATIC_STATIC'"
-                  functionIpWifiStatic
-                  functionAccpCredentials
-                  functionIpEthernetStatic
+                  functionNetIpWifiStatic
+                  functionNetAccpCredentials
+                  functionNetIpEthernetStatic
               elif [ "$varIpType" = "DUAL-DHCP_DHCP" ]; then
                 echo "DEBUG: setup config for 'DUAL-DHCP_DHCP'"
-                  functionIpWifiDynamic
-                  functionAccpCredentials
+                  functionNetIpWifiDynamic
+                  functionNetAccpCredentials
             fi
   fi
 }
