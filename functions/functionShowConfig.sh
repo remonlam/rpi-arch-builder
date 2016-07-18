@@ -3,7 +3,7 @@
 #########################################################################################
 ### NOTE: This function will print all configuration information at the end of this script.
 ###
-function printShowConfig {
+function functionShowConfig {
   echo "#########################################################################"
   echo "Display configuration information;"
   echo "#########################################################################"

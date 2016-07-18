@@ -7,6 +7,20 @@
 . ./functions/masterVariables.sh
 
 # Import other functions
+
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+. ./functions/
+
+
 . ./functions/setRootPassword.sh
 . ./functions/formatDisk.sh
 . ./functions/functionFindSource.sh
+. ./functions/functionShowConfig.sh

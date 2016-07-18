@@ -3,7 +3,7 @@
 #########################################################################################
 ### NOTE: This function will format the disk, create new partitions / filesystem -
 ###       Mount it to /temp/boot & /temp/root.
-function formatDisk {
+function functionFormatDisk {
   echo "################################################################################"
   echo "#  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING      #"
   echo "#                                                                              #"
