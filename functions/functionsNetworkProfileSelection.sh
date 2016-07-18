@@ -14,10 +14,17 @@
 . ./functions/functionNetHostName.sh
 . ./functions/functionNetNetworkType.sh
 . ./functions/functionNetAccpCredentials.sh
+. ./functions/functionNetSingleIpType.sh
+. ./functions/functionNetDualIpType.sh
 . ./functions/functionNetIpWifiStatic.sh
+. ./functions/functionNetIpWifiDynamic.sh
 . ./functions/functionNet
 . ./functions/functionNet
 . ./functions/functionNet
+. ./functions/functionNet
+. ./functions/functionNet
+. ./functions/functionNet
+. ./functions/functionNetIpEthernetStatic
 
 
 
