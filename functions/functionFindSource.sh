@@ -10,7 +10,7 @@ read -p "Enter file name: " FILE
   then
      echo "File $FILE exist."
      varCheckForLocalSource="TRUE"
-     md5 -q $FILE
+     #md5 -q $FILE
      echo "File found..."
      echo $varCheckForLocalSource
   else
