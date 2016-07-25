@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-# Set fixed variables
+# Set fixed variables, need to move this part to function
 part1=1
 part2=2
 
