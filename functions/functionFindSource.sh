@@ -5,7 +5,8 @@
 # Create function call disabled for now.
 function functionFindSource {
 . ./functions/functionLocalVsDownload.sh
-read -p "Enter file name: " FILE
+echo "Mounting an ISO?"
+read -p "Enter file name: (default skip)" FILE
   if [ -f "$FILE" ];
   then
      echo "File $FILE exist."
@@ -19,7 +20,6 @@ read -p "Enter file name: " FILE
      varCheckForLocalSource="FALSE"
      echo "File not found..."
      echo $varCheckForLocalSource
-     . ./functions/functionLocalVsDownload.sh
      functionLocalVsDownload
   fi
 

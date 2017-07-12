@@ -11,6 +11,7 @@ function functionSelectArmVersion {
   echo "Select 'ARM v6' when using models like:  PI 1 MODEL A+"
   echo "                                         PI 1 MODEL B+"
   echo "                                         PI ZERO"
+  echo "                                         PI ZERO W"
   echo ""
   echo "Select 'ARM v7' when using models like:  PI 2 MODEL B"
   echo ""
@@ -34,35 +35,30 @@ function functionSelectArmVersion {
   echo "#########################################################################"
   echo "Download and extract Arch Linux ARM image"
   echo "#########################################################################"
-  echo "Download Arch Linux ARM v'$armVersion' and expand to root"
+  mkdir -p downloads
+
+  . ./functions/functionHandleFileCache.sh
+
+    FILENAME=false
+    NAME=false
     if [ $armVersion = 6 ]; then
-      echo "Downloading Arch Linux ARM v6"
-       wget -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-      echo "Download complete, expanding image to root"
-       {
-       bsdtar -xpf /temp/ArchLinuxARM-rpi-latest.tar.gz -C /temp/root
-       sync
-       } &> /dev/null
-       elif [ $armVersion = 7 ]; then
-         echo "Downloading Arch Linux ARM v7"
-          wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding image to root"
-          {
-          bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
-          sync
-          } &> /dev/null
-       elif [ $armVersion = 8 ]; then
-         echo "Downloading Arch Linux ARM v8, but the image is still v7 :-("
-          wget  -P /temp/ http://archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-         echo "Download complete, expanding image to root"
-          {
-          bsdtar -xpf /temp/ArchLinuxARM-rpi-2-latest.tar.gz -C /temp/root
-          sync
-          } &> /dev/null
-      else
-        echo "'Something went wrong with the arm version selecton... script will exit..."
-        exit 1
+        FILENAME="ArchLinuxARM-rpi-latest.tar.gz"
+        NAME="Arch Linux ARM v6"
+    elif [ $armVersion = 7 ]; then
+        FILENAME="ArchLinuxARM-rpi-2-latest.tar.gz"
+        NAME="Arch Linux ARM v7"
+    elif [ $armVersion = 8 ]; then
+        FILENAME="ArchLinuxARM-rpi-3-latest.tar.gz"
+        NAME="Arch Linux ARM v8"
     fi
+
+    if [ "$FILENAME" = false ] ; then
+        echo "'Something went wrong with the arm version selection... script will exit..."
+        exit 1
+    else
+        functionHandleFileCache "$FILENAME" "$NAME"
+    fi
+
   echo "Download and extract complete"
 
 #Move boot files to the first partition:
