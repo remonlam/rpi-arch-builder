@@ -6,7 +6,7 @@
 # - USB/SD mountpoint to "root" $mount_root
 
 function functionSetRootPassword {
-read -s -p "Enter password: " inRootPass
+read -s -p "Enter root password: " inRootPass
   echo -n root:$inRootPass | chpasswd -c SHA512 -R $mount_root
 echo "Root password has been set"
 }
