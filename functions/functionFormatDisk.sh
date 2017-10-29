@@ -25,8 +25,8 @@ function functionFormatDisk {
   echo "####################################################################################"
 
 # Set fixed variables
-  part1=1
-  part2=2
+  part1=p1
+  part2=p2
 
 # Unmount partitions
   {
