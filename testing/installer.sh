@@ -37,18 +37,6 @@ fi
 ###################################
 
 #########################################################################################
-### NOTE: This function will remove the SystemctlNetwork and SystemctlDNS services -
-###       to prevent DHCP from kicking in during boot and make DNS to point to the -
-###       configured addresses.
-function disableSystemctlServices {
-# Remove SystemctlNetwork
-rm /temp/root/etc/systemctl/../../../
-
-# Remove Systemctl-DNS
-rm /temp/root/etc/systemctl/../../../
-}
-
-#########################################################################################
 ### NOTE: This function will format the disk, create new partitions / filesystem -
 ###       Mount it to /temp/boot & /temp/root.
 function formatSdCard {
@@ -149,7 +137,7 @@ function checkForImage {
   fi
 }
 #########################################################################################
-test
+
 
 
 #########################################################################################
@@ -389,7 +377,6 @@ function ipWifiStatic {
     read -p 'Enter Gateway: ' wifiGateway
     read -p 'Enter DNS 1: ' wifiDns1
     read -p 'Enter DNS 2: ' wifiDns2
-    read -P 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files and wpa packages
   {
@@ -430,7 +417,6 @@ function ipEthernetStatic {
     read -p 'Enter Gateway: ' ethernetGateway
     read -p 'Enter DNS 1: ' ethernetDns1
     read -p 'Enter DNS 2: ' ethernetDns2
-    read -P 'Enter DNS Search domain: ' dnsSearch
 
 # Downloading netctl template files
   {
@@ -517,39 +503,6 @@ function networkProfileSelection {
 
 
 
-#########################################################################################
-### NOTE: This function will remove the SystemctlNetwork and SystemctlDNS services -
-###       to prevent DHCP from kicking in during boot and make DNS to point to the -
-###       configured addresses.
-function disableSystemdServices {
-# Remove systemd-networkd & systemd-resolved
-rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-resolved.service
-rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-resolved.socket
-
-# Remove old resolv.conf
-rm -rf /etc/resolv.conf
-
-# Create new resolv.conf file
-if [ "$varNetworkType" = "WIFI" ]; then
-  echo "Setup Fixed IP settings for: ##"
-  echo "#########################################################################"
-      echo -e "search $dnsSearch\nnameserver $wifiDns1\nnameserver $wifiDns2" > /etc/resolv.conf
-  elif [ "$varNetworkType" = "ETH" ]; then
-      echo "Setup Fixed IP settings for: ##"
-      echo "#########################################################################"
-              echo -e "search $dnsSearch\nnameserver $ethernetDns1\nnameserver $ethernetDns2" > /etc/resolv.conf
-  elif [ "$varNetworkType" = "DUAL" ]; then
-      echo "Setup Fixed IP settings for: ##"
-      echo "#########################################################################"
-        echo -e "search $dnsSearch\nnameserver $ethernetDns1\nnameserver $ethernetDns2" > /etc/resolv.conf
-          fi
-#fi
-}
-#########################################################################################
-
-
-
 ###################################
 ## Script functions
 ###################################
@@ -597,15 +550,45 @@ function printConfigSummary {
 
 
 
+
+#if [ $varNetworkType = "WIFI" ]; then
+#  echo "Using WiFi networking"
+#    accpCredentials
+#    singleIpType
+#      elif [ $varNetworkType = "ETH" ]; then
+#        echo "Using Ethernet networking"
+#          singleIpType
+#      elif [ $varNetworkType = "DUAL" ]; then
+#        echo "Using Dual (WiFi/Eth) networking"
+#          accpCredentials
+#          dualIpType
+#      else
+#        echo "Error; something went wrong selecting the correct 'networkType'"
+#fi
+#}
+
+
+#function ipConfiguration {
+#if [ $varNetworkType = "WIFI" ]; then
+#  echo "Using WiFi networking"
+#            elif [ $varNetworkType = "ETH" ]; then
+#        echo "Using Ethernet networking"
+#          elif [ $varNetworkType = "DUAL" ]; then
+#        echo "Using Dual (WiFi/Eth) networking"
+#          else
+#        echo "Error; something went wrong selecting the correct 'networkType' for the IP configuration"
+#fi
+#}
+
+
+
 #########################################################################################
 ### RUNTIME                                                                           ###
 #########################################################################################
 
-# Run functions
 formatSdCard
 selectArmVersion
 networkProfileSelection
-#disableSystemServices
 systemPreConfiguration
 cleanupFunction
 printConfigSummary
