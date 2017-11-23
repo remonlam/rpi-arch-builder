@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 # Create function call disabled for now.
 function functionFindSource {
 . ./functions/functionLocalVsDownload.sh
@@ -22,16 +20,3 @@ read -p "Enter file name: (default skip)" FILE
      echo $varCheckForLocalSource
      functionLocalVsDownload
   fi
-
-
-
-
-#echo $varCheckForLocalSource
-#echo $FILE
-#echo $1
-
-#if [[ $(md5sum "test.txt") = d41d8cd98f00b204e9800998ecf8427e* ]]
-#md5sum -c "d41d8cd98f00b204e9800998ecf8427e" "test.txt"
-
-#if [[ $(md5sum "$test") = d41d8cd98f00b204e9800998ecf8427e* ]]
-}
