@@ -20,3 +20,4 @@ read -p "Enter file name: (default skip)" FILE
      echo $varCheckForLocalSource
      functionLocalVsDownload
   fi
+}
