@@ -66,21 +66,21 @@ function functionFormatDisk {
   echo "#########################################################################"
   echo "Create temporary mount point for 'root' and 'boot'"
   echo "#########################################################################"
-  echo "Create and mount the FAT filesystem on '$sdCard$part1'"
+  echo "Create and mount the FAT filesystem on '$sdCard"1"'"
   {
     sleep 10
     mkfs.vfat /dev/$sdCard"1"
     sleep 5
     mkdir -p /temp/boot # make a variable of this mountpint $mount_boot
-    mount /dev/$sdCard$part1 $mount_boot
+    mount /dev/$sdCard"1" $mount_boot
   } &> /dev/null
   echo ""
 
-  echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
+  echo "Create and mount the ext4 filesystem on '$sdCard"2"'"
   {
-    mkfs -t ext4 /dev/dev/$sdCard"2"
+    mkfs -t ext4 /dev/$sdCard"2"
     mkdir -p /temp/root
-    mount /dev/$sdCard$part2 $mount_root # make a variable of this mountpint $mount_root
+    mount /dev/$sdCard"2" $mount_root # make a variable of this mountpint $mount_root
   } &> /dev/null
   echo "#########################################################################"
   echo ""
