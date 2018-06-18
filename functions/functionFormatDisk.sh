@@ -78,7 +78,7 @@ function functionFormatDisk {
 
   echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
   {
-    mkfs -t ext4 /dev//dev/$sdCard"2"
+    mkfs -t ext4 /dev/dev/$sdCard"2"
     mkdir -p /temp/root
     mount /dev/$sdCard$part2 $mount_root # make a variable of this mountpint $mount_root
   } &> /dev/null
