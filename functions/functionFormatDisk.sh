@@ -86,4 +86,3 @@ function functionFormatDisk {
   echo ""
   echo ""
 }
-#exit 1 ## <-- just a test
