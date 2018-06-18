@@ -9,7 +9,7 @@
 #########################################################################################
 
 # Run functions
-#functionRootCheck
+functionRootCheck
 functionFormatDisk
 #functionFindSource
 functionSelectArmVersion
@@ -18,5 +18,5 @@ functionSelectArmVersion
 #functionsNetworkProfileSelection
 #functionSetRootPassword
 #functionSystemPreConfiguration
-functionCleanup
+#functionCleanup
 #functionShowConfig
