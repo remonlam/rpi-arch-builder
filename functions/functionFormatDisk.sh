@@ -68,8 +68,9 @@ function functionFormatDisk {
   echo "#########################################################################"
   echo "Create and mount the FAT filesystem on '$sdCard$part1'"
   {
-    sleep 5
+    sleep 10
     mkfs.vfat /dev/$sdCard$part1
+    sleep 5
     mkdir -p /temp/boot # make a variable of this mountpint $mount_boot
     mount /dev/$sdCard$part1 $mount_boot
   } &> /dev/null
@@ -77,7 +78,9 @@ function functionFormatDisk {
 
   echo "Create and mount the ext4 filesystem on '$sdCard$part2'"
   {
+    sleep 10
     mkfs -t ext4 /dev/$sdCard$part2
+    sleep 5
     mkdir -p /temp/root
     mount /dev/$sdCard$part2 $mount_root # make a variable of this mountpint $mount_root
   } &> /dev/null
