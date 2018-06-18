@@ -37,7 +37,7 @@ function functionSelectArmVersion {
   echo "#########################################################################"
   mkdir -p downloads
 
-  . ./functions/functionHandleFileCache.sh
+  #. ./functions/functionHandleFileCache.sh
 
     FILENAME=false
     NAME=false
