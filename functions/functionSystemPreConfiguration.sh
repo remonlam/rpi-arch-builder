@@ -10,10 +10,10 @@ function functionSystemPreConfiguration {
 # Change GPU memory from 64MB to 16MB
   sed -i 's/gpu_mem=64/gpu_mem=16/' /temp/boot/config.txt
 # Enable root logins for sshd
-  sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config
+  sed -i "s/"#"PermitRootLogin prohibit-password/PermitRootLogin yes/" /temp/root/etc/ssh/sshd_config ### <--- FIX ME!!!!
 # Download post configuration script and make file executable
   {
-  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/sources/configure-system.sh
+  wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/sources/configure-system.sh ### <--- FIX ME!!!!
   chmod 755 /temp/configure-system.sh
   } &> /dev/null
 # Copy "configure-system.sh" script to "root"
