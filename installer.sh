@@ -18,5 +18,5 @@ functionFindSource
 functionsNetworkProfileSelection
 functionSetRootPassword
 functionSystemPreConfiguration
-functionCleanup
-functionShowConfig
+#functionCleanup
+#functionShowConfig
