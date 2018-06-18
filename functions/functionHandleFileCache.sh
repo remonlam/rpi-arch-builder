@@ -38,9 +38,9 @@ function functionHandleFileCache {
     fi
 
     echo "Expanding image to root, this may take a few minutes."
-    {
+    #{
        #bsdtar -xpf "./downloads/$1" -C /temp/root
        #sync
        #rm -rf "./downloads/$1"
-    } #&> /dev/null
+    #} #&> /dev/null
 }
