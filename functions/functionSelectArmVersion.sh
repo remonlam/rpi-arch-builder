@@ -31,12 +31,13 @@ function functionSelectArmVersion {
    esac
   done
 
-# Download Arch Linux ARM image, check what version ARM v6 or v7
+# Download Arch Linux ARM image, check what version ARM v6, v7 or v8
   echo "#########################################################################"
   echo "Download and extract Arch Linux ARM image"
   echo "#########################################################################"
   mkdir -p downloads
 
+# Import function;
   . ./functions/functionHandleFileCache.sh
 
     FILENAME=false

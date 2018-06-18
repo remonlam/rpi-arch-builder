@@ -39,5 +39,5 @@ function functionHandleFileCache {
     {
        bsdtar -xpf "./downloads/$1" -C /temp/root
        sync
-    } &> /dev/null
+    } #&> /dev/null
 }
