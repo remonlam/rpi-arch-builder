@@ -9,7 +9,7 @@
 #########################################################################################
 
 # Run functions
-functionRootCheck
+#functionRootCheck
 functionFormatDisk
 #functionFindSource
 functionSelectArmVersion
