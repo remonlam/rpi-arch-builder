@@ -18,5 +18,5 @@ functionSelectArmVersion
 #functionsNetworkProfileSelection
 #functionSetRootPassword
 #functionSystemPreConfiguration
-#functionCleanup
+functionCleanup
 #functionShowConfig
