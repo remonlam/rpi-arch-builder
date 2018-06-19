@@ -32,13 +32,12 @@ function functionHandleFileCache {
     if [ "$DOWNLOADED" = false ] ; then
         echo "Downloading $2..."
         wget -P ./downloads/$1 http://archlinuxarm.org/os/$1
-        sync
         echo "Download complete"
     fi
 
     echo "Expanding image to root, this may take a few minutes."
     {
-#       bsdtar -xpf "./downloads/$1" -C /temp/root
+       bsdtar -xpf "./downloads/$1" -C /temp/root
        sync
        #rm -rf "./downloads/$1"
     } #&> /dev/null
