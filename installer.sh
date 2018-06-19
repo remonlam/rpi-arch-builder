@@ -16,7 +16,7 @@ functionSelectArmVersion
 #functionDisableSystemctlServices #need to check if this is the right place to execute this function
 
 #functionsNetworkProfileSelection
-#functionSetRootPassword
+functionSetRootPassword
 #functionSystemPreConfiguration
 functionCleanup
-#functionShowConfig
+functionShowConfig
