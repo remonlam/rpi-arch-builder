@@ -5,7 +5,7 @@
 function functionHandleFileCache {
     echo "Downloading $2 Checksum"
     CHECKSUM="`wget -qO- http://os.archlinuxarm.org/os/$1.md5 | awk '{ print $1 }'`"
-    DOWNLOADPATH="./downloads/$1"
+    DOWNLOADPATH="./downloads/$1/$1"
     DOWNLOADED=false
     echo "Checking Download Cache For $2"
     if [ -e "$DOWNLOADPATH" ]; then
