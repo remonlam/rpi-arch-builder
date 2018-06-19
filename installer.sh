@@ -11,7 +11,7 @@
 # Run functions
 functionRootCheck
 functionFormatDisk
-#functionFindSource
+functionFindSource
 functionSelectArmVersion
 #functionDisableSystemctlServices #need to check if this is the right place to execute this function
 
