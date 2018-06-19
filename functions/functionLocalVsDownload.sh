@@ -9,8 +9,9 @@ if [ "$varCheckForLocalSource" = "TRUE" ]; then
    bsdtar -xpf $FILE -C /temp/root
    sync
    } &> /dev/null
-  #Move boot files to the first partition:
-    mv /temp/root/boot/* /temp/boot
+      #Move boot files to the first partition:
+      cp -r /temp/root/boot/* /temp/boot
+      rm -rf /temp/root/boot
     echo "#########################################################################"
     echo ""
     echo ""
