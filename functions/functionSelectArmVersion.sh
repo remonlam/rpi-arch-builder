@@ -63,7 +63,8 @@ function functionSelectArmVersion {
   echo "Download and extract complete"
 
 #Move boot files to the first partition:
-  mv /temp/root/boot/* /temp/boot
+  cp -r /temp/root/boot/* /temp/boot
+  rm -rf /temp/root/boot
   echo "#########################################################################"
   echo ""
   echo ""
