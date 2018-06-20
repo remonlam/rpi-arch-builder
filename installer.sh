@@ -11,12 +11,12 @@
 # Run functions
 functionRootCheck
 functionFormatDisk
-#functionFindSource
+#functionFindSource # some kind of loop, needs more work!
 functionSelectArmVersion
 #functionDisableSystemctlServices #need to check if this is the right place to execute this function
 
 #functionsNetworkProfileSelection
-functionSetRootPassword
+functionSetRootPassword # function does not work
 #functionSystemPreConfiguration
-functionCleanup
-functionShowConfig
+#functionCleanup
+#functionShowConfig
