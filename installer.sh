@@ -15,8 +15,8 @@ functionFormatDisk
 functionSelectArmVersion
 #functionDisableSystemctlServices #need to check if this is the right place to execute this function
 
-#functionsNetworkProfileSelection
-functionSetRootPassword # function does not work
+functionsNetworkProfileSelection
+#functionSetRootPassword # function does not work on Debian
 #functionSystemPreConfiguration
 #functionCleanup
-#functionShowConfig
+functionShowConfig
