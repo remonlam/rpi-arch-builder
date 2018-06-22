@@ -1,0 +1,18 @@
+wget https://www.libarchive.org/downloads/libarchive-3.3.1.tar.gz
+tar xzf libarchive-3.3.1.tar.gz
+cd libarchive-3.3.1
+./configure
+make
+sudo make install
+
+
+
+echo -n root:password1234 | chpasswd -c SHA512 -R /temp/root/ /usr/sbin/chpasswd e
+
+echo 'root:toor' | chroot /home/containers/wheezy/ /usr/sbin/chpasswd
+
+
+chpasswd -R /temp/root root:password1234
+
+
+ln -s /temp/root/usr/sbin/nscd /usr/sbin/nscd
