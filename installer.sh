@@ -18,5 +18,5 @@ functionSelectArmVersion
 functionsNetworkProfileSelection
 #functionSetRootPassword # function does not work on Debian
 #functionSystemPreConfiguration
-#functionCleanup
+functionCleanup
 functionShowConfig
