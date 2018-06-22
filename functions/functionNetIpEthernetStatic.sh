@@ -18,10 +18,10 @@ function functionNetIpEthernetStatic {
 # Downloading netctl template files
   {
   # Copy netctl eth0 config file
-    cp -rf sources/eth0.network /temp/etc/systemd/network/
+    cp -rf sources/eth0.network /temp/root/etc/systemd/network/
     #cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
   # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-    cp -rf sources/wlan0.network /temp/etc/systemd/network/
+    cp -rf sources/wlan0.network /temp/root/etc/systemd/network/
     #cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
     #ln -s '/temp/root/etc/systemd/system/netctl@eth0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@eth0.service'
   } &> /dev/null
