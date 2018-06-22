@@ -35,6 +35,7 @@ function functionNetIpEthernetStatic {
     sed -i "s/NETDNS2/$ethernetDns2/" /temp/root/etc/systemd/network/eth0.network
 
  # Remove "systemd-networkd.service"
+    rm -rf /temp/root/etc/systemd/network/eth.network
     #rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
     #rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-networkd.service
 }
