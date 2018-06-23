@@ -40,7 +40,7 @@ Then browse to ```cd ./rpi-arch-builder/``` and execute the script like ```sudo 
 
 ## Can't get it to work?
 Well the script have some dependencies that needs to be in-place in order get it working.
-To make things a bit more simple, I have tested it on an CentOS 7 Live distro, so it should work on this version of CentOS.
+To make things a bit more simple, I have tested it on an CentOS 7 Live [moving to Debian] distro, so it should work on this version of CentOS [moving to Debian].
 
 ## Why this script?
 This repo contains everything that is needed to create a Arch Linux ARM image for the Raspberry Pi (any Pi version that contains an ARM version 6, 7 or 8).

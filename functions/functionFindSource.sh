@@ -4,7 +4,7 @@
 function functionFindSource {
 . ./functions/functionLocalVsDownload.sh
 echo "Mounting an ISO?"
-read -p "Enter file name: (default skip)" FILE
+read -p "Enter full location path to source file (to skip this just press ENTER): " FILE
   if [ -f "$FILE" ];
   then
      echo "File $FILE exist."

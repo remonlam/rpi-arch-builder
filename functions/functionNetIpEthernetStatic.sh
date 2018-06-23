@@ -18,22 +18,33 @@ function functionNetIpEthernetStatic {
 # Downloading netctl template files
   {
   # Copy netctl eth0 config file
-    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/eth0
-    cp -rf /temp/eth0 /temp/root/etc/netctl/
+    cp -rf sources/eth0.network /temp/root/etc/systemd/network/
+    #cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
   # Copy wlan0.service file to systemd and create symlink to make it work at first boot
-    wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/netctl%40eth0.service
-    cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
-    ln -s '/temp/root/etc/systemd/system/netctl@eth0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@eth0.service'
+    cp -rf sources/wlan0.network /temp/root/etc/systemd/network/
+    #cp -rf /temp/netctl@eth0.service /temp/root/etc/systemd/system/
+    #ln -s '/temp/root/etc/systemd/system/netctl@eth0.service' '/temp/root/etc/systemd/system/multi-user.target.wants/netctl@eth0.service'
   } &> /dev/null
 
 # Prepping Ethernet configuration files
   echo "Prepping Ethernet netctl config files"
-    sed -i "s/IP=dhcp/IP=static/" /temp/root/etc/netctl/eth0
-    sed -i "/IP=static/ a Address=('$ethernetIp/$ethernetMask')" /temp/root/etc/netctl/eth0
-    sed -i "/Address=/ a Gateway=('$ethernetGateway')" /temp/root/etc/netctl/eth0
-    sed -i "/Gateway=/ a DNS=('$ethernetDns1' '$ethernetDns2')" /temp/root/etc/netctl/eth0
+    sed -i "s/NETIP/$ethernetIp/" /temp/root/etc/systemd/network/eth0.network
+    sed -i "s/NETSUB/$ethernetMask/" /temp/root/etc/systemd/network/eth0.network
+    sed -i "s/NETGW/$ethernetGateway/" /temp/root/etc/systemd/network/eth0.network
+    sed -i "s/NETDNS1/$ethernetDns1/" /temp/root/etc/systemd/network/eth0.network
+    sed -i "s/NETDNS2/$ethernetDns2/" /temp/root/etc/systemd/network/eth0.network
 
  # Remove "systemd-networkd.service"
-    rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-    rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-networkd.service
+    rm -rf /temp/root/etc/systemd/network/eth.network
+    #rm -rf /temp/root/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+    #rm -rf /temp/root/etc/systemd/system/socket.target.wants/systemd-networkd.service
 }
+
+
+##### TEMP STUFF
+#/etc/systemd/network/eth0.network
+
+#Address=IPSUB
+#Gateway=GW
+#DNS=8.8.8.8
+#DNS=8.8.4.4

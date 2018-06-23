@@ -1,5 +1,0 @@
-Just a testing file
-
-
-read -s -p "Enter password: " pass
-echo -n root:$pass | chpasswd -c SHA512 -R /mnt/sdcard

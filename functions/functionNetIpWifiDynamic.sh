@@ -11,9 +11,9 @@ function functionNetIpWifiDynamic {
 # Downloading netctl template files and wpa packages
   {
   # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-    wget -P /temp/ https://github.com/remonlam/rpi-zero-arch/raw/master/packages/libnl_wpa_package.tar.gz
+    cp -rf packages/libnl-3.4.0-1-aarch64.pkg.tar.xz /temp/
   # Extract tar.gz file to root/
-    tar -xf /temp/libnl_wpa_package.tar.gz -C /temp/root/
+    tar -xf /temp/libnl-3.4.0-1-aarch64.pkg.tar.xz -C /temp/root/
   # Copy netctl wlan0 config file
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
     cp -rf /temp/wlan0 /temp/root/etc/netctl/

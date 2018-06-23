@@ -10,7 +10,7 @@ if [ `id -u` = 0 ] ; then
         # Check or install wget, tar and badtar
         {
           echo "Install 'wget, bsdtar & tar'"
-        yum install -y wget bsdtar tar
+        apt install -y wget bsdtar tar
         } &> /dev/null
         echo "#########################################################################"
         echo ""
