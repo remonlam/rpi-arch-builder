@@ -8,12 +8,24 @@ function functionNetIpWifiDynamic {
   echo "Setup Dynamic IP settings for: $varIpType"
   echo "#########################################################################"
 
+# libnl platform select
+    PLATFORM=FALSE
+    if [ $armversion = 6 ]; then
+        PLATFORM="armv6h"
+    elif [ $armversion = 7 ]; then
+        PLATFORM="armv7h"
+    elif [ $armversion = 8 ]; then
+        PLATFORM="aarch64"
+    fi
+
+    echo "The platform is $PLATFORM."
+
 # Downloading netctl template files and wpa packages
   {
   # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
-    cp -rf packages/libnl-3.4.0-1-aarch64.pkg.tar.xz /temp/
+    cp -rf packages/libnl-3.4.0-1-${PLATFORM}.pkg.tar.xz /temp/
   # Extract tar.gz file to root/
-    tar -xf /temp/libnl-3.4.0-1-aarch64.pkg.tar.xz -C /temp/root/
+    tar -xf /temp/libnl-3.4.0-1-${PLATFORM}.pkg.tar.xz -C /temp/root/
   # Copy netctl wlan0 config file
     wget -P /temp/ https://raw.githubusercontent.com/remonlam/rpi-zero-arch/master/networking/wlan0
     cp -rf /temp/wlan0 /temp/root/etc/netctl/
