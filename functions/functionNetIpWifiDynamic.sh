@@ -9,6 +9,7 @@ function functionNetIpWifiDynamic {
   echo "#########################################################################"
 
 # libnl platform select
+    source ./armversion
     PLATFORM=FALSE
     if [ $armversion = 6 ]; then
         PLATFORM="armv6h"
