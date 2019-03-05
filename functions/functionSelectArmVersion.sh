@@ -30,7 +30,7 @@ function functionSelectArmVersion {
           'ARM v8' ) armVersion="8"; break;;
    esac
   done
-    echo "armversion='$armVersion'" >> ./armversion
+    echo "armversion=${armVersion}" >> ./armversion
 # Download Arch Linux ARM image, check what version ARM v6, v7 or v8
   echo "#########################################################################"
   echo "Download and extract Arch Linux ARM image"
