@@ -20,7 +20,7 @@ function functionNetIpWifiDynamic {
     fi
 
     echo "The platform is $PLATFORM."
-
+    rm ./armversion 
 # Downloading netctl template files and wpa packages
   {
   # Download "libnl" and "wpa_supplicant" package tar.gz file from GitHub
