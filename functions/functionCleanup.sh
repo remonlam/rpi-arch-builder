@@ -24,3 +24,6 @@ rm -rf /temp/
 echo "All files in /temp/ are removed!"
 echo "#########################################################################"
 }
+
+# Remove armversion
+rm ../armversion
